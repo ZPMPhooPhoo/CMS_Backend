@@ -18,21 +18,43 @@ class AdminSeeder extends Seeder
      */
     public function run()
     {
+        $superadmin = User::create([
+            'name' => 'Super Admin',
+            'email' => 'superadmin@gmail.com',
+            'password' => Hash::make('12345678'),
+            'phone' => '09-123456789',
+            'address' => 'Yangon',
+            'contact_person' => 'contact',
+            'position' => 'position',
+            'role_id' => '1'
+        ]
+        );
+        
         $admin = User::create([
-            'name' => 'phoo phoo',
-            'email' => 'phoophoo@gmail.com',
-            'password' => Hash::make('12345678')
+            'name' => 'Admin',
+            'email' => 'admin@gmail.com',
+            'password' => Hash::make('12345678'),
+            'phone' => '09-123456789',
+            'address' => 'Yangon',
+            'contact_person' => 'contact',
+            'position' => 'position',
+            'role_id' => '2'
         ]
         );
 
-        $editor = User::create([
-            'name' => 'editor',
-            'email' => 'editor@gmail.com',
-            'password' => Hash::make('12345678')
-        ]
-        );
+        $manager = User::create([
+            'name' => 'Manager',
+            'email' => 'manager@gmail.com',
+            'password' => Hash::make('12345678'),
+            'phone' => '09-123456789',
+            'address' => 'Yangon',
+            'contact_person' => 'contact',
+            'position' => 'position',
+            'role_id' => '3'
+        ]);
 
-        $admin->assignRole('SuperAdmin');
-        $editor->assignRole('Editor');
+        $superadmin->assignRole('SuperAdmin');
+        $admin->assignRole('Admin');
+        $manager->assignRole('Manager');
     }
 }

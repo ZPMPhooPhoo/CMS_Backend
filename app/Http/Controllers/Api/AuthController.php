@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\MobileUser;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -29,7 +30,7 @@ class AuthController extends Controller
                 ], 401);
             }
 
-            $user = MobileUser::create([
+            $user = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => Hash::make($request->password)
@@ -54,7 +55,7 @@ class AuthController extends Controller
             $validateUser = Validator::make($request->all(), 
             [
                 'email' => 'required|email',
-                'password' => 'required'
+                'password' => 'required',
             ]);
 
             if($validateUser->fails()){
@@ -65,14 +66,14 @@ class AuthController extends Controller
                 ], 401);
             }
 
-            if(!Auth::guard('mobile_users')->attempt($request->only(['email', 'password']))){
+            if(!Auth::guard('web')->attempt($request->only(['email', 'password']))){
                 return response()->json([
                     'status' => false,
                     'message' => 'Email & Password does not match with our record.',
                 ], 401);
             }
 
-            $user = MobileUser::where('email', $request->email)->first();
+            $user = User::where('email', $request->email)->first();
 
             return response()->json([
                 'status' => true,
@@ -87,5 +88,4 @@ class AuthController extends Controller
             ], 500);
         }
     }
-
 }

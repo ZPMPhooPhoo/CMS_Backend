@@ -17,7 +17,10 @@ class RoleAndPermissionSeeder extends Seeder
     public function run()
     {
         $super_admin = Role::create(['name' => 'SuperAdmin']);
-        $editor = Role::create(['name' => 'Editor']);
+        $admin = Role::create(['name' => 'Admin']);
+        $manager = Role::create(['name' => 'Manager']);
+        //$developer = Role::create(['name' => 'Developer']);
+        $customer = Role::create(['name' => 'Customer']);
 
         $dashboard = Permission::create(['name' => 'dashboard']);        
         $widget = Permission::create(['name' => 'widget']);
@@ -36,10 +39,11 @@ class RoleAndPermissionSeeder extends Seeder
         $role_show = Permission::create(['name' => 'roleShow']);
         $role_delete = Permission::create(['name' => 'roleDelete']);
 
-        
-
         $super_admin->givePermissionTo([$dashboard, $widget, $datatable, $admin_list, $permission_list, $permission_create, $permission_edit, $permission_show, $permission_delete, $role_list, $role_create, $role_edit, $role_show, $role_delete]);
 
-        $editor->givePermissionTo([]);
+        $admin->givePermissionTo([]);
+        $manager->givePermissionTo([]);
+        //$developer->givePermissionTo([]);
+        $customer->givePermissionTo([]);
     }
 }

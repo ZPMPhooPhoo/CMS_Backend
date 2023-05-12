@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Project;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -22,6 +23,11 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'phone',
+        'address',
+        'contact_person',
+        'position',
+        'role_id'
     ];
 
     /**
@@ -42,4 +48,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function project()
+    {
+        return $this->hasMany(Project::class);
+    }
 }
