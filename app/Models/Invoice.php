@@ -12,7 +12,7 @@ class Invoice extends Model
     protected $fillable = [
         'invoice',
         'description',
-        'contract_date',
+        'invoice_date',
         'contract_id',
         'quotation_id'
     ];

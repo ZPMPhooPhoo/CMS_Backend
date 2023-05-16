@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\MobileUser;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,7 +18,8 @@ class AuthController extends Controller
             [
                 'name' => 'required',
                 'email' => 'required|email',
-                'password' => 'required'
+                'password' => 'required',
+                'role_id' => 'required'
             ]);
 
             if ($validateUser->fails()) {
@@ -33,12 +33,17 @@ class AuthController extends Controller
             $user = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
-                'password' => Hash::make($request->password)
+                'password' => Hash::make($request->password),
+                'phone' => '09912345679',
+                'address' => 'ygn',
+                'contact_person' => 'contact',
+                'position'=>'position',
+                'role_id' => $request->role_id
             ]);
 
             return response()->json([
                 'status' => true,
-                'message' => 'Mobile User Created Successfully',
+                'message' => 'User Created Successfully',
                 'token' => $user->createToken("API TOKEN")->plainTextToken
             ], 200);
         } catch (\Throwable $th) {

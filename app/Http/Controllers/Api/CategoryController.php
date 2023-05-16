@@ -1,0 +1,138 @@
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use App\Http\Controllers\Controller;
+use App\Http\Requests\CategoryRequest;
+use App\Models\Category;
+use App\Services\Category\CategoryServiceInterface;
+use Exception;
+use Illuminate\Http\Request;
+
+class CategoryController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    private $categoryService;
+    public function __construct(CategoryServiceInterface $categoryService){
+        $this->categoryService = $categoryService;
+    }
+
+    public function index()
+    {
+        try {
+            $data = Category::all();
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Category List!',
+                'data' => $data
+            ], 200);
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage(),
+                'data' => $data
+            ], 500);
+        }
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(CategoryRequest $request)
+    {
+        try {
+            $data = $this->categoryService->store($request->validated());
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Category Created Successfully!',
+                'data' => $data
+            ], 200);
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage(),
+                'data' => $data
+            ], 500);
+        }
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        try {
+            $data = Category::where('id', $id)->first();
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Category Show!',
+                'data' => $data
+            ], 200);
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage(),
+                'data' => $data
+            ], 500);
+        }
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(CategoryRequest $request, $id)
+    {
+        try {
+            $data = $this->categoryService->update($request->validated(),$id);
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Category Edited Successfully!',
+                'data' => $data
+            ], 200);
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage(),
+                'data' => $data
+            ], 500);
+        }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        try {
+            $data = $this->categoryService->delete($id);
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Category Deleted Successfully!',
+                'data' => $data
+            ], 200);
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage(),
+                'data' => $data
+            ], 500);
+        }
+    }
+}
