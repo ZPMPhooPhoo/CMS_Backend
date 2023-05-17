@@ -3,31 +3,31 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\QuotationRequest;
-use App\Models\Quotation;
-use App\Services\Quotation\QuotationServiceInterface;
+use App\Http\Requests\PermissionRequest;
+use App\Services\Permission\PermissionServiceInterface;
 use Exception;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Permission;
 
-class QuotationController extends Controller
+class PermissionController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    private $quotationService;
-    public function __construct(QuotationServiceInterface $quotationService){
-        $this->quotationService = $quotationService;
+    private $permissionService;
+    public function __construct(PermissionServiceInterface $permissionService)
+    {
+        $this->permissionService = $permissionService;
     }
-
     public function index()
     {
         try {
-            $data = Quotation::all();
+            $data = Permission::all();
             return response()->json([
                 'status' => 'success',
-                'message' => 'Quotation List!',
+                'message' => 'Permission List!',
                 'data' => $data
             ], 200);
         } catch (Exception $e) {
@@ -45,20 +45,22 @@ class QuotationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(QuotationRequest $request)
+    public function store(PermissionRequest $request)
     {
         try {
-            $data = $this->quotationService->store($request->validated());
+          
+
+            $data = $this->permissionService->store($request->validated());
             return response()->json([
                 'status' => 'success',
-                'message' => 'Quotation Created Successfully!',
+                'message' => 'Permission Created Successfully!',
                 'data' => $data
             ], 200);
         } catch (Exception $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage(),
-                'data' => $data
+                'data' => ''
             ], 500);
         }
     }
@@ -72,10 +74,10 @@ class QuotationController extends Controller
     public function show($id)
     {
         try {
-            $data = Quotation::where('id', $id)->first();
+            $data = Permission::where('id', $id)->first();
             return response()->json([
                 'status' => 'success',
-                'message' => 'Quotation Show!',
+                'message' => 'Permission Show!',
                 'data' => $data
             ], 200);
         } catch (Exception $e) {
@@ -94,13 +96,13 @@ class QuotationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(QuotationRequest $request, $id)
+    public function update(PermissionRequest $request, $id)
     {
         try {
-            $data = $this->quotationService->update($request->validated(),$id);
+            $data = $this->permissionService->update($request->validated(),$id);
             return response()->json([
                 'status' => 'success',
-                'message' => 'Quotation Edited Successfully!',
+                'message' => 'Permission Edited Successfully!',
                 'data' => $data
             ], 200);
         } catch (Exception $e) {
@@ -121,10 +123,10 @@ class QuotationController extends Controller
     public function destroy($id)
     {
         try {
-            $data = $this->quotationService->delete($id);
+            $data = $this->permissionService->delete($id);
             return response()->json([
                 'status' => 'success',
-                'message' => 'Quotation Deleted Successfully!',
+                'message' => 'Permission Deleted Successfully!',
                 'data' => $data
             ], 200);
         } catch (Exception $e) {

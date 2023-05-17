@@ -28,7 +28,7 @@ class InvoiceRequest extends FormRequest
             'description' => '',
             'invoice_date' => 'required',
             'contract_id' => 'required',
-            'quotation_id' => ''
+            'quotation_id' => 'nullable|exists:quotations,id',
         ];
     }
 }

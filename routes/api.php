@@ -3,8 +3,12 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ContractController;
+use App\Http\Controllers\Api\InvoiceController;
+use App\Http\Controllers\Api\PermissionController;
 use App\Http\Controllers\Api\ProjectController;
 use App\Http\Controllers\Api\QuotationController;
+use App\Http\Controllers\Api\ReceiptController;
+use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\UserController;
 use App\Models\Quotation;
 use Illuminate\Http\Request;
@@ -28,7 +32,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::apiResource('roles', RoleController::class)->middleware('auth:sanctum');
+Route::apiResource('permissions', PermissionController::class)->middleware('auth:sanctum');
+
 Route::apiResource('categories', CategoryController::class)->middleware('auth:sanctum');
 Route::apiResource('projects', ProjectController::class)->middleware('auth:sanctum');
 Route::apiResource('quotations', QuotationController::class)->middleware('auth:sanctum');
 Route::apiResource('contracts',ContractController::class)->middleware('auth:sanctum');
+Route::apiResource('invoices',InvoiceController::class)->middleware('auth:sanctum');
+Route::apiResource('receipts',ReceiptController::class)->middleware('auth:sanctum');

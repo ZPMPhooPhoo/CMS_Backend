@@ -3,31 +3,31 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\QuotationRequest;
-use App\Models\Quotation;
-use App\Services\Quotation\QuotationServiceInterface;
+use App\Http\Requests\RoleRequest;
+use App\Services\Role\RoleServiceInterface;
 use Exception;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
-class QuotationController extends Controller
+class RoleController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    private $quotationService;
-    public function __construct(QuotationServiceInterface $quotationService){
-        $this->quotationService = $quotationService;
+    private $roleService;
+    public function __construct(RoleServiceInterface $roleService){
+        $this->roleService = $roleService;
     }
 
     public function index()
     {
         try {
-            $data = Quotation::all();
+            $data = Role::all();
             return response()->json([
                 'status' => 'success',
-                'message' => 'Quotation List!',
+                'message' => 'Role List!',
                 'data' => $data
             ], 200);
         } catch (Exception $e) {
@@ -45,13 +45,13 @@ class QuotationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(QuotationRequest $request)
+    public function store(RoleRequest $request)
     {
         try {
-            $data = $this->quotationService->store($request->validated());
+            $data = $this->roleService->store($request->validated());
             return response()->json([
                 'status' => 'success',
-                'message' => 'Quotation Created Successfully!',
+                'message' => 'Role Created Successfully!',
                 'data' => $data
             ], 200);
         } catch (Exception $e) {
@@ -72,10 +72,10 @@ class QuotationController extends Controller
     public function show($id)
     {
         try {
-            $data = Quotation::where('id', $id)->first();
+            $data = Role::where('id', $id)->first();
             return response()->json([
                 'status' => 'success',
-                'message' => 'Quotation Show!',
+                'message' => 'Role Show!',
                 'data' => $data
             ], 200);
         } catch (Exception $e) {
@@ -94,13 +94,13 @@ class QuotationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(QuotationRequest $request, $id)
+    public function update(RoleRequest $request, $id)
     {
         try {
-            $data = $this->quotationService->update($request->validated(),$id);
+            $data = $this->roleService->update($request->validated(),$id);
             return response()->json([
                 'status' => 'success',
-                'message' => 'Quotation Edited Successfully!',
+                'message' => 'Role Edited Successfully!',
                 'data' => $data
             ], 200);
         } catch (Exception $e) {
@@ -121,10 +121,10 @@ class QuotationController extends Controller
     public function destroy($id)
     {
         try {
-            $data = $this->quotationService->delete($id);
+            $data = $this->roleService->delete($id);
             return response()->json([
                 'status' => 'success',
-                'message' => 'Quotation Deleted Successfully!',
+                'message' => 'Role Deleted Successfully!',
                 'data' => $data
             ], 200);
         } catch (Exception $e) {
