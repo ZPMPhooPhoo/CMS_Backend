@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProjectRequest;
 use App\Models\project;
+use App\Repository\Project\PrjRepoInterface;
 use App\Services\Project\PrjServiceInterface;
 use Exception;
 use Illuminate\Http\Request;
@@ -16,15 +17,16 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    private $prjService;
-    public function __construct(PrjServiceInterface $prjService){
+    private $prjRepo,$prjService;
+    public function __construct(PrjRepoInterface $prjRepo,PrjServiceInterface $prjService){
+        $this->prjRepo = $prjRepo;
         $this->prjService = $prjService;
     }
 
     public function index()
     {
         try {
-            $data = project::all();
+            $data = $this->prjRepo->get();
             return response()->json([
                 'status' => 'success',
                 'message' => 'Project List!',
@@ -34,7 +36,6 @@ class ProjectController extends Controller
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage(),
-                'data' => $data
             ], 500);
         }
     }
@@ -49,6 +50,7 @@ class ProjectController extends Controller
     {
         try {
             $data = $this->prjService->store($request->validated());
+            
             return response()->json([
                 'status' => 'success',
                 'message' => 'Project Created Successfully!',
@@ -58,9 +60,9 @@ class ProjectController extends Controller
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage(),
-                'data' => $data
             ], 500);
         }
+        
     }
 
     /**
@@ -72,7 +74,7 @@ class ProjectController extends Controller
     public function show($id)
     {
         try {
-            $data = Project::where('id', $id)->first();
+            $data = $this->prjRepo->show($id);
             return response()->json([
                 'status' => 'success',
                 'message' => 'Project Show!',
@@ -82,7 +84,6 @@ class ProjectController extends Controller
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage(),
-                'data' => $data
             ], 500);
         }
     }
@@ -100,14 +101,13 @@ class ProjectController extends Controller
             $data = $this->prjService->update($request->validated(),$id);
             return response()->json([
                 'status' => 'success',
-                'message' => 'Project Edited Successfully!',
+                'message' => 'Project Updated Successfully!',
                 'data' => $data
             ], 200);
         } catch (Exception $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage(),
-                'data' => $data
             ], 500);
         }
     }
@@ -131,7 +131,6 @@ class ProjectController extends Controller
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage(),
-                'data' => $data
             ], 500);
         }
     }

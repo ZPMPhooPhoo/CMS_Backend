@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RoleRequest;
+use App\Repository\Role\RoleRepoInterface;
 use App\Services\Role\RoleServiceInterface;
 use Exception;
 use Illuminate\Http\Request;
@@ -16,15 +17,16 @@ class RoleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    private $roleService;
-    public function __construct(RoleServiceInterface $roleService){
+    private $roleRepo,$roleService;
+    public function __construct(RoleRepoInterface $roleRepo,RoleServiceInterface $roleService){
+        $this->roleRepo = $roleRepo;
         $this->roleService = $roleService;
     }
 
     public function index()
     {
         try {
-            $data = Role::all();
+            $data = $this->roleRepo->get();
             return response()->json([
                 'status' => 'success',
                 'message' => 'Role List!',
@@ -72,7 +74,7 @@ class RoleController extends Controller
     public function show($id)
     {
         try {
-            $data = Role::where('id', $id)->first();
+            $data = $this->roleRepo->show($id);
             return response()->json([
                 'status' => 'success',
                 'message' => 'Role Show!',
@@ -100,7 +102,7 @@ class RoleController extends Controller
             $data = $this->roleService->update($request->validated(),$id);
             return response()->json([
                 'status' => 'success',
-                'message' => 'Role Edited Successfully!',
+                'message' => 'Role Updated Successfully!',
                 'data' => $data
             ], 200);
         } catch (Exception $e) {

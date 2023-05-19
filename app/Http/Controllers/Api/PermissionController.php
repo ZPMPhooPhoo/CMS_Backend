@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PermissionRequest;
+use App\Repository\Permission\PermissionRepoInterface;
 use App\Services\Permission\PermissionServiceInterface;
 use Exception;
 use Illuminate\Http\Request;
@@ -16,15 +17,16 @@ class PermissionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    private $permissionService;
-    public function __construct(PermissionServiceInterface $permissionService)
+    private $permissionRepo,$permissionService;
+    public function __construct(PermissionRepoInterface $permissionRepo,PermissionServiceInterface $permissionService)
     {
+        $this->permissionRepo = $permissionRepo;
         $this->permissionService = $permissionService;
     }
     public function index()
     {
         try {
-            $data = Permission::all();
+            $data = $this->permissionRepo->get();
             return response()->json([
                 'status' => 'success',
                 'message' => 'Permission List!',
@@ -48,8 +50,6 @@ class PermissionController extends Controller
     public function store(PermissionRequest $request)
     {
         try {
-          
-
             $data = $this->permissionService->store($request->validated());
             return response()->json([
                 'status' => 'success',
@@ -60,7 +60,7 @@ class PermissionController extends Controller
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage(),
-                'data' => ''
+                'data' => $data
             ], 500);
         }
     }
@@ -74,7 +74,7 @@ class PermissionController extends Controller
     public function show($id)
     {
         try {
-            $data = Permission::where('id', $id)->first();
+            $data = $this->permissionRepo->show($id);
             return response()->json([
                 'status' => 'success',
                 'message' => 'Permission Show!',
@@ -102,7 +102,7 @@ class PermissionController extends Controller
             $data = $this->permissionService->update($request->validated(),$id);
             return response()->json([
                 'status' => 'success',
-                'message' => 'Permission Edited Successfully!',
+                'message' => 'Permission Updated Successfully!',
                 'data' => $data
             ], 200);
         } catch (Exception $e) {

@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Repository\User\UserRepoInterface;
+use App\Repository\User\UserRepository;
 use App\Repository\Role\RoleRepoInterface;
 use App\Repository\Role\RoleRepository;
 use App\Repository\Permission\PermissionRepoInterface;
@@ -18,6 +20,8 @@ use App\Repository\Quotation\QuotationRepoInterface;
 use App\Repository\Quotation\QuotationRepository;
 use App\Repository\Receipt\ReceiptRepoInterface;
 use App\Repository\Receipt\ReceiptRepository;
+use App\Services\User\UserServiceInterface;
+use App\Services\User\UserService;
 use App\Services\Role\RoleServiceInterface;
 use App\Services\Role\RoleService;
 use App\Services\Permission\PermissionServiceInterface;
@@ -55,6 +59,7 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+
         $this->app->bind(RoleRepoInterface::class,RoleRepository::class);
         $this->app->bind(RoleServiceInterface::class,RoleService::class);
         $this->app->bind(PermissionRepoInterface::class, PermissionRepository::class);
@@ -71,5 +76,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(InvoiceServiceInterface::class,InvoiceService::class);
         $this->app->bind(ReceiptRepoInterface::class,ReceiptRepository::class);
         $this->app->bind(ReceiptServiceInterface::class,ReceiptService::class);
+        $this->app->bind(UserRepoInterface::class,UserRepository::class);
+        $this->app->bind(UserServiceInterface::class,UserService::class);
     }
 }

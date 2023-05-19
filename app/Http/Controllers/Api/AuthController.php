@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\UserProject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -41,9 +42,13 @@ class AuthController extends Controller
                 'role_id' => $request->role_id
             ]);
 
+            // $user = User::find(2);
+            // $prjIds = [2];
+            // $user->project()->attach($prjIds);
+
             return response()->json([
                 'status' => true,
-                'message' => 'User Created Successfully',
+                'message' => 'User Created Successfully!',
                 'token' => $user->createToken("API TOKEN")->plainTextToken
             ], 200);
         } catch (\Throwable $th) {
@@ -82,7 +87,7 @@ class AuthController extends Controller
 
             return response()->json([
                 'status' => true,
-                'message' => 'User Logged In Successfully',
+                'message' => 'User Logged In Successfully!',
                 'token' => $user->createToken("API TOKEN")->plainTextToken
             ], 200);
 

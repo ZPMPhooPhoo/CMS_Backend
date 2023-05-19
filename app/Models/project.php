@@ -14,13 +14,12 @@ class project extends Model
         'description',
         'status',
         'maintenance_active',
-        'user_id',
         'category_id',
     ];
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsToMany(User::class, 'user_projects');
     }
 
     public function category()

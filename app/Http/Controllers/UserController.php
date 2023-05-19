@@ -141,7 +141,7 @@ class UserController extends Controller
             'password' => $request->password
         ]);
 
-        $user->syncRoles($request->validated('roles'));
+        $user->syncRoles($request->validated('role_id'));
         return redirect()->route('user.index');
     }
 

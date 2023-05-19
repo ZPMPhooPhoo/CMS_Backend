@@ -28,8 +28,10 @@ class ProjectRequest extends FormRequest
             'description' => '',
             'status' => 'required',
             'maintenance_active' => 'required',
-            'user_id' => 'required',
             'category_id' => 'required',
+            'users' => 'required|array',
+            'users.*' => 'exists:users,id', // Assuming users is an array of user IDs
+            //'user_id' => 'required|array',
         ];
     }
 }

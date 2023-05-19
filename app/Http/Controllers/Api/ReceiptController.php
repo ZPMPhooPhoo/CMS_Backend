@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ReceiptRequest;
 use App\Models\Receipt;
+use App\Repository\Receipt\ReceiptRepoInterface;
 use App\Services\Receipt\ReceiptServiceInterface;
 use Exception;
 use Illuminate\Http\Request;
@@ -16,14 +17,15 @@ class ReceiptController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    private $receiptService;
-    public function __construct(ReceiptServiceInterface $receiptService){
+    private $receiptRepo,$receiptService;
+    public function __construct(ReceiptRepoInterface $receiptRepo,ReceiptServiceInterface $receiptService){
+        $this->receiptRepo = $receiptRepo;
         $this->receiptService = $receiptService;
     }
     public function index()
     {
         try {
-            $data = Receipt::all();
+            $data = $this->receiptRepo->get();
             return response()->json([
                 'status' => 'success',
                 'message' => 'Receipt List!',
@@ -71,7 +73,7 @@ class ReceiptController extends Controller
     public function show($id)
     {
         try {
-            $data = Receipt::where('id', $id)->first();
+            $data = $this->receiptRepo->show($id);
             return response()->json([
                 'status' => 'success',
                 'message' => 'Receipt Show!',
@@ -99,7 +101,7 @@ class ReceiptController extends Controller
             $data = $this->receiptService->update($request->validated(),$id);
             return response()->json([
                 'status' => 'success',
-                'message' => 'Receipt Edited Successfully!',
+                'message' => 'Receipt Updated Successfully!',
                 'data' => $data
             ], 200);
         } catch (Exception $e) {

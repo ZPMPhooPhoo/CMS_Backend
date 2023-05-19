@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\InvoiceRequest;
 use App\Models\Invoice;
+use App\Repository\Invoice\InvoiceRepoInterface;
 use App\Services\Invoice\InvoiceServiceInterface;
 use Exception;
 use Illuminate\Http\Request;
@@ -16,15 +17,16 @@ class InvoiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    private $invoiceService;
-    public function __construct(InvoiceServiceInterface $invoiceService){
+    private $invoiceRepo,$invoiceService;
+    public function __construct(InvoiceRepoInterface $invoiceRepo,InvoiceServiceInterface $invoiceService){
+        $this->invoiceRepo = $invoiceRepo;
         $this->invoiceService = $invoiceService;
     }
 
     public function index()
     {
         try {
-            $data = Invoice::all();
+            $data = $this->invoiceRepo->get();
             return response()->json([
                 'status' => 'success',
                 'message' => 'Invoice List!',
@@ -72,7 +74,7 @@ class InvoiceController extends Controller
     public function show($id)
     {
         try {
-            $data = Invoice::where('id', $id)->first();
+            $data = $this->invoiceRepo->show($id);
             return response()->json([
                 'status' => 'success',
                 'message' => 'Invoice Show!',
@@ -100,7 +102,7 @@ class InvoiceController extends Controller
             $data = $this->invoiceService->update($request->validated(),$id);
             return response()->json([
                 'status' => 'success',
-                'message' => 'Invoice Edited Successfully!',
+                'message' => 'Invoice Updated Successfully!',
                 'data' => $data
             ], 200);
         } catch (Exception $e) {

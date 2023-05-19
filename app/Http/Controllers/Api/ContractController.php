@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ContractRequest;
 use App\Models\Contract;
+use App\Repository\Contract\ContractRepoInterface;
 use App\Services\Contract\ContractServiceInterface;
 use Exception;
 use Illuminate\Http\Request;
@@ -16,15 +17,16 @@ class ContractController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    private $contractService;
-    public function __construct(ContractServiceInterface $contractService){
+    private $contractRepo,$contractService;
+    public function __construct(ContractRepoInterface $contractRepo,ContractServiceInterface $contractService){
+        $this->contractRepo = $contractRepo;
         $this->contractService = $contractService;
     }
 
     public function index()
     {
         try {
-            $data = Contract::all();
+            $data = $this->contractRepo->get();
             return response()->json([
                 'status' => 'success',
                 'message' => 'Contract List!',
@@ -72,7 +74,7 @@ class ContractController extends Controller
     public function show($id)
     {
         try {
-            $data = Contract::where('id', $id)->first();
+            $data = $this->contractRepo->show($id);
             return response()->json([
                 'status' => 'success',
                 'message' => 'Contract Show!',
@@ -100,7 +102,7 @@ class ContractController extends Controller
             $data = $this->contractService->update($request->validated(),$id);
             return response()->json([
                 'status' => 'success',
-                'message' => 'Contract Edited Successfully!',
+                'message' => 'Contract Updated Successfully!',
                 'data' => $data
             ], 200);
         } catch (Exception $e) {

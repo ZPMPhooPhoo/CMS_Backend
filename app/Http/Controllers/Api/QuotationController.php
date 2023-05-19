@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\QuotationRequest;
 use App\Models\Quotation;
+use App\Repository\Quotation\QuotationRepoInterface;
 use App\Services\Quotation\QuotationServiceInterface;
 use Exception;
 use Illuminate\Http\Request;
@@ -16,15 +17,16 @@ class QuotationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    private $quotationService;
-    public function __construct(QuotationServiceInterface $quotationService){
+    private $quotationRepo,$quotationService;
+    public function __construct(QuotationRepoInterface $quotationRepo,QuotationServiceInterface $quotationService){
+        $this->quotationRepo = $quotationRepo;
         $this->quotationService = $quotationService;
     }
 
     public function index()
     {
         try {
-            $data = Quotation::all();
+            $data = $this->quotationRepo->get();
             return response()->json([
                 'status' => 'success',
                 'message' => 'Quotation List!',
@@ -72,7 +74,7 @@ class QuotationController extends Controller
     public function show($id)
     {
         try {
-            $data = Quotation::where('id', $id)->first();
+            $data = $this->quotationRepo->show($id);
             return response()->json([
                 'status' => 'success',
                 'message' => 'Quotation Show!',
@@ -100,7 +102,7 @@ class QuotationController extends Controller
             $data = $this->quotationService->update($request->validated(),$id);
             return response()->json([
                 'status' => 'success',
-                'message' => 'Quotation Edited Successfully!',
+                'message' => 'Quotation Updated Successfully!',
                 'data' => $data
             ], 200);
         } catch (Exception $e) {

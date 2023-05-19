@@ -9,7 +9,7 @@ use App\Http\Controllers\Api\ProjectController;
 use App\Http\Controllers\Api\QuotationController;
 use App\Http\Controllers\Api\ReceiptController;
 use App\Http\Controllers\Api\RoleController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\Api\UserController;
 use App\Models\Quotation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -35,6 +35,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::apiResource('roles', RoleController::class)->middleware('auth:sanctum');
 Route::apiResource('permissions', PermissionController::class)->middleware('auth:sanctum');
 
+Route::apiResource('users',UserController::class)->middleware('auth:sanctum');
 Route::apiResource('categories', CategoryController::class)->middleware('auth:sanctum');
 Route::apiResource('projects', ProjectController::class)->middleware('auth:sanctum');
 Route::apiResource('quotations', QuotationController::class)->middleware('auth:sanctum');

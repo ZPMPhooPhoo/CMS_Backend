@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
+use App\Repository\Category\CategoryRepoInterface;
 use App\Services\Category\CategoryServiceInterface;
 use Exception;
 use Illuminate\Http\Request;
@@ -16,15 +17,16 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    private $categoryService;
-    public function __construct(CategoryServiceInterface $categoryService){
+    private $categoryRepo,$categoryService;
+    public function __construct(CategoryRepoInterface $cataegoryRepo,CategoryServiceInterface $categoryService){
+        $this->categoryRepo = $cataegoryRepo;
         $this->categoryService = $categoryService;
     }
 
     public function index()
     {
         try {
-            $data = Category::all();
+            $data = $this->categoryRepo->get();
             return response()->json([
                 'status' => 'success',
                 'message' => 'Category List!',
@@ -72,7 +74,7 @@ class CategoryController extends Controller
     public function show($id)
     {
         try {
-            $data = Category::where('id', $id)->first();
+            $data = $this->categoryRepo->show($id);
             return response()->json([
                 'status' => 'success',
                 'message' => 'Category Show!',
@@ -100,7 +102,7 @@ class CategoryController extends Controller
             $data = $this->categoryService->update($request->validated(),$id);
             return response()->json([
                 'status' => 'success',
-                'message' => 'Category Edited Successfully!',
+                'message' => 'Category Updated Successfully!',
                 'data' => $data
             ], 200);
         } catch (Exception $e) {

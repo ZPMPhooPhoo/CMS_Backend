@@ -25,13 +25,13 @@ class UserRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            //'email' => 'required|email:rfc,dns|unique:users|email',
-            //'password' => 'required|min:8',
-            // 'password_confirmation' => 'required|same:password',
-            'email' => 'required|email:rfc,dns|email',
-            'password' => 'required|min:8|confirmed',
-            // 'password_confirmation' => 'required',
-            'roles' => 'required'
+            'email' => 'required|email',
+            'password' => 'required|min:8',
+            'phone'=>'required',
+            'address'=> '',
+            'contact_person'=>'required',
+            'position'=>'required',
+            'role_id' => 'required'
         ];
     }
 }

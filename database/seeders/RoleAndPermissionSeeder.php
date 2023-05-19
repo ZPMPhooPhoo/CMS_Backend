@@ -19,7 +19,7 @@ class RoleAndPermissionSeeder extends Seeder
         $super_admin = Role::create(['name' => 'SuperAdmin']);
         $admin = Role::create(['name' => 'Admin']);
         $manager = Role::create(['name' => 'Manager']);
-        //$developer = Role::create(['name' => 'Developer']);
+        $developer = Role::create(['name' => 'Developer']);
         $customer = Role::create(['name' => 'Customer']);
 
         $dashboard = Permission::create(['name' => 'dashboard']);        
@@ -43,7 +43,7 @@ class RoleAndPermissionSeeder extends Seeder
 
         $admin->givePermissionTo([]);
         $manager->givePermissionTo([]);
-        //$developer->givePermissionTo([]);
+        $developer->givePermissionTo([]);
         $customer->givePermissionTo([]);
     }
 }
