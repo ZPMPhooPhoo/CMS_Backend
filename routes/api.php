@@ -42,3 +42,4 @@ Route::apiResource('quotations', QuotationController::class)->middleware('auth:s
 Route::apiResource('contracts',ContractController::class)->middleware('auth:sanctum');
 Route::apiResource('invoices',InvoiceController::class)->middleware('auth:sanctum');
 Route::apiResource('receipts',ReceiptController::class)->middleware('auth:sanctum');
+Route::get('/customers' , [UserController::class, 'customers'])->middleware('auth:sanctum');

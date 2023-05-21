@@ -84,7 +84,7 @@ class UserController extends Controller
                 'message' => $e->getMessage()
             ], 500);
         }
-        
+
     }
 
     /**$post->tag()->attach($request->tags);
@@ -126,6 +126,25 @@ class UserController extends Controller
                 'message' => 'User Deleted Successfully!',
                 'data' => $data,
             ],200);
+        }catch(Exception $e){
+            return response()->json([
+                'status'=>'error',
+                'message'=>$e->getMessage(),
+            ],500);
+        }
+    }
+
+    public function customers(){
+        try{
+
+            $data = $this->userRepo->customers();
+            return response()->json([
+                'status'=> 'Success',
+                'message'=>'Customer List!',
+                'data' => $data
+
+            ], 200);
+
         }catch(Exception $e){
             return response()->json([
                 'status'=>'error',
