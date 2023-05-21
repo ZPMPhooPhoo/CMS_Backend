@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('description')->nullable();
             $table->date('invoice_date');
             $table->foreignId('contract_id')->constrained('contracts');
-            //$table->foreignId('quotation_id')->constrained('quotations')->nullable();
             $table->foreignId('quotation_id')->nullable()->constrained('quotations');
             $table->timestamps();
         });

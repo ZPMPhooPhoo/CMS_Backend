@@ -23,8 +23,9 @@ class PrjService implements PrjServiceInterface
 
     public function update($request, $id){
         $project = Project::where('id', $id)->first();
+        $data = $project->update($request);
         $project->user()->sync($request['users']);
-        return $project->update($request);
+        return $data;
     }
 
     public function delete($id)
