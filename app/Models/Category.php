@@ -19,4 +19,4 @@ class Category extends Model
     }
 }
 
-// testing
+// testing category
