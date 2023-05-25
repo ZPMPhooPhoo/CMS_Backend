@@ -31,4 +31,5 @@ class project extends Model
     {
         return $this->hasMany(Quotation::class);
     }
+
 }

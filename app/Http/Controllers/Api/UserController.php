@@ -187,4 +187,24 @@ class UserController extends Controller
             ],500);
         }
     }
+
+
+    public function developers(){
+        try{
+
+            $data = $this->userRepo->developers();
+            return response()->json([
+                'status'=> 'Success',
+                'message'=>'Developer List!',
+                'data' => $data
+
+            ], 200);
+
+        }catch(Exception $e){
+            return response()->json([
+                'status'=>'error',
+                'message'=>$e->getMessage(),
+            ],500);
+        }
+    }
 }
