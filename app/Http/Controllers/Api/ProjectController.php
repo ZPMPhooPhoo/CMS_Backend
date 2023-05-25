@@ -50,7 +50,7 @@ class ProjectController extends Controller
     {
         try {
             $data = $this->prjService->store($request->validated());
-            
+
             return response()->json([
                 'status' => 'success',
                 'message' => 'Project Created Successfully!',
@@ -62,7 +62,7 @@ class ProjectController extends Controller
                 'message' => $e->getMessage(),
             ], 500);
         }
-        
+
     }
 
     /**
@@ -134,4 +134,32 @@ class ProjectController extends Controller
             ], 500);
         }
     }
+
+
+    // public function projectsActive(Request $request){
+    //     try{
+    //         $data = $this->prjService->projectsActive($request);
+    //         return response()->json([
+    //             'status' => 'success',
+    //             'message' => 'Project maintain Successfully!',
+    //             'data' => $data
+    //         ], 200);
+    //     }catch(Exception $e){
+    function user_project($id){
+        try{
+            $data = $this->prjRepo->user_project($id);
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Project Deleted Successfully!',
+                'data' => $data
+            ], 200);
+        }catch (Exception $e){
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage(),
+            ], 500);
+        }
+    }
 }
+
+

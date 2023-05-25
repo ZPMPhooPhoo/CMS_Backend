@@ -3,6 +3,7 @@ namespace App\Services\Project;
 
 use App\Models\Project;
 use App\Services\Project\PrjServiceInterface;
+use PDO;
 
 class PrjService implements PrjServiceInterface
 {
@@ -32,5 +33,10 @@ class PrjService implements PrjServiceInterface
     {
         $data = Project::where('id', $id)->first();
         return $data->delete();
+    }
+
+    public function projectsActive($request){
+        $data=Project::where('maintenance_active',$request->maintain_active)->get();
+        return $data;
     }
 }
