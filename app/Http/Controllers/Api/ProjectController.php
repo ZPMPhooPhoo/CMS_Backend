@@ -135,6 +135,16 @@ class ProjectController extends Controller
         }
     }
 
+
+    // public function projectsActive(Request $request){
+    //     try{
+    //         $data = $this->prjService->projectsActive($request);
+    //         return response()->json([
+    //             'status' => 'success',
+    //             'message' => 'Project maintain Successfully!',
+    //             'data' => $data
+    //         ], 200);
+    //     }catch(Exception $e){
     function user_project($id){
         try{
             $data = $this->prjRepo->user_project($id);
@@ -150,6 +160,6 @@ class ProjectController extends Controller
             ], 500);
         }
     }
-
-
 }
+
+

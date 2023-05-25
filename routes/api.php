@@ -29,6 +29,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/auth/signup', [AuthController::class, 'signup']);
 Route::post('/auth/signin', [AuthController::class, 'signin']);
+Route::post('/auth/userUpdate/{id}',[AuthController::class,'userUpdate']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -48,4 +49,10 @@ Route::apiResource('receipts',ReceiptController::class)->middleware('auth:sanctu
 
 Route::get('/userproject/{id}', [ProjectController::class, 'user_project'])->middleware('auth:sanctum');
 Route::get('/customers' , [UserController::class, 'customers'])->middleware('auth:sanctum');
+
+Route::get('/customersWithName',[UserController::class, 'customersWithName'])->middleware('auth:sanctum');
+Route::get('/userAdminWithName',[UserController::class,'userAdminWithName'])->middleware('auth:sanctum');
+Route::get('/projectsActive',[ProjectController::class, 'projectsActive'])->middleware('auth:sanctum');
+
 Route::get('/developers' , [UserController::class, 'developers'])->middleware('auth:sanctum');
+

@@ -2,6 +2,7 @@
 
 namespace App\Repository\Project;
 use App\Models\Project;
+use App\Models\User;
 use App\Models\UserProject;
 use Illuminate\Support\Facades\DB;
 
@@ -18,7 +19,6 @@ class PrjRepository implements PrjRepoInterface
         $data = Project::with('category')->where('id', $id)->first();
         return $data;
     }
-
     public function user_project($id)
     {
         // $userIds = DB::table('user_projects')
