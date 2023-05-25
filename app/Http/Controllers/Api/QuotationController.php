@@ -137,22 +137,4 @@ class QuotationController extends Controller
             ], 500);
         }
     }
-
-    // public function upload(QuotationRequest $request)
-    // {
-    //     try {
-    //         $data = $this->quotationService->upload($request);
-    //         return response()->json([
-    //             'status' => 'success',
-    //             'message' => 'Quotation Deleted Successfully!',
-    //             'data' => $data
-    //         ], 200);
-    //     } catch (Exception $e) {
-    //         return response()->json([
-    //             'status' => 'error',
-    //             'message' => $e->getMessage(),
-    //             'data' => $data
-    //         ], 500);
-    //     }
-    // }
 }

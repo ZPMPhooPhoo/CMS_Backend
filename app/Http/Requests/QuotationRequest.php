@@ -27,8 +27,10 @@ class QuotationRequest extends FormRequest
             'quotation' => 'required',
             'description' => '',
             'is_agree' => 'required',
-            'quotation_date' => 'required|date_format:Y-m-d',
+            'quotation_date' => 'required|date_format:Y-m-d', // Add the date format rule
             'project_id' => 'required',
         ];
     }
 }
+
+

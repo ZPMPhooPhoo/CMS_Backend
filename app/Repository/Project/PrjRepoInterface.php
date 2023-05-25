@@ -6,6 +6,5 @@ interface PrjRepoInterface
 {
     public function get();
     public function show($id);
-
-    public function prj_user();
+    public function user_project($id);
 }
