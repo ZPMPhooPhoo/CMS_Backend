@@ -19,6 +19,10 @@ class UserRepository implements UserRepoInterface
         $data=User::where('role_id' , 5)->get();
         return $data;
     }
+    public function developers(){
+        $data = User::where('role_id' , 4)->get();
+        return $data;
+    }
 }
 
 ?>
