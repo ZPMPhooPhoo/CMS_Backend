@@ -49,7 +49,49 @@ class AuthController extends Controller
             return response()->json([
                 'status' => true,
                 'message' => 'User Created Successfully!',
-                'token' => $user->createToken("API TOKEN")->plainTextToken
+                // 'token' => $user->createToken("API TOKEN")->plainTextToken
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => $th->getMessage()
+            ], 500);
+        }
+    }
+    public function userUpdate(Request $request,$id){
+        try{
+            $user=User::where('id' ,$id)->first();
+            $validateUser = Validator::make($request->all(), 
+            [
+                'name' => 'required',
+                'email' => 'required|email',
+                'role_id' => 'required'
+            ]);
+
+            if($validateUser->fails()){
+                return response()->json([
+                    'status' => false,
+                    'message' => 'validation error',
+                    'errors' => $validateUser->errors()
+                ], 401);
+            }
+
+            // $user = User::updated([
+                $user->name = $request->name;
+                $user->email = $request->email;
+                $user->phone = "09912345679";
+                $user->address = 'ygn';
+                $user->contact_person = 'contact';
+                $user->position ='position';
+                $user->role_id =$request->role_id;
+
+                $user->syncRoles($request['role_id']);
+                $user->update();
+               
+            return response()->json([
+                'status' => true,
+                'message' => 'User Created Successfully!',
+                // 'token' => $user->createToken("API TOKEN")->plainTextToken
             ], 200);
         } catch (\Throwable $th) {
             return response()->json([
