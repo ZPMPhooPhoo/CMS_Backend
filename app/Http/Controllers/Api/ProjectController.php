@@ -134,4 +134,21 @@ class ProjectController extends Controller
             ], 500);
         }
     }
+    
+    public function prj_user()
+    {
+        try {
+            $data = $this->prjRepo->prj_user();
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Project User List!',
+                'data' => $data
+            ], 200);
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage(),
+            ], 500);
+        }
+    }
 }

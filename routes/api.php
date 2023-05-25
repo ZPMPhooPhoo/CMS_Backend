@@ -43,3 +43,11 @@ Route::apiResource('contracts',ContractController::class)->middleware('auth:sanc
 Route::apiResource('invoices',InvoiceController::class)->middleware('auth:sanctum');
 Route::apiResource('receipts',ReceiptController::class)->middleware('auth:sanctum');
 Route::get('/customers' , [UserController::class, 'customers'])->middleware('auth:sanctum');
+
+Route::get('/prj_user' , [ProjectController::class, 'prj_user'])->middleware('auth:sanctum');
+
+Route::post('/upload', [QuotationController::class, 'upload']);
+
+Route::get('/files', [QuotationController::class, 'files']);
+
+Route::get('/files/filename', [QuotationController::class, 'download']);

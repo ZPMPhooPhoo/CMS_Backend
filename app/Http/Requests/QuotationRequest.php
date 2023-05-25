@@ -27,7 +27,7 @@ class QuotationRequest extends FormRequest
             'quotation' => 'required',
             'description' => '',
             'is_agree' => 'required',
-            'quotation_date' => 'required',
+            'quotation_date' => 'required|date_format:Y-m-d',
             'project_id' => 'required',
         ];
     }
