@@ -45,7 +45,7 @@ class QuotationService implements QuotationServiceInterface
             }
 
             $fileName = $request['quotation']->getClientOriginalName();
-            $request['quotation']->storeAs('quotations', $fileName);
+            $request['quotation']->storeAs('public/quotations', $fileName);
 
             $request['quotation'] = $fileName;
             $request['is_agree']=isset($request['is_agree']) ? 1:0;

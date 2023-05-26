@@ -53,8 +53,32 @@ class AdminSeeder extends Seeder
             'role_id' => '3'
         ]);
 
+        $developer = User::create([
+            'name' => 'Developer',
+            'email' => 'developer@gmail.com',
+            'password' => Hash::make('12345678'),
+            'phone' => '09-123456789',
+            'address' => 'Yangon',
+            'contact_person' => 'contact',
+            'position' => 'position',
+            'role_id' => '4'
+        ]);
+
+        $customer = User::create([
+            'name' => 'Customer',
+            'email' => 'customer@gmail.com',
+            'password' => Hash::make('12345678'),
+            'phone' => '09-123456789',
+            'address' => 'Yangon',
+            'contact_person' => 'contact',
+            'position' => 'position',
+            'role_id' => '5'
+        ]);
+
         $superadmin->assignRole('SuperAdmin');
         $admin->assignRole('Admin');
         $manager->assignRole('Manager');
+        $developer->assignRole('Developer');
+        $customer->assignRole('Customer');
     }
 }

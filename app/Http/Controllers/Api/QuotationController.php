@@ -21,6 +21,12 @@ class QuotationController extends Controller
     public function __construct(QuotationRepoInterface $quotationRepo,QuotationServiceInterface $quotationService){
         $this->quotationRepo = $quotationRepo;
         $this->quotationService = $quotationService;
+        // $this->middleware('permission:QuotationList', ['only' => 'index']);
+        // $this->middleware('permission:QuotationCreate', ['only' => ['create', 'store']]);
+        // $this->middleware('permission:QuotationEdit', ['only' => ['edit', 'update']]);
+        // $this->middleware('permission:QuotationShow', ['only' => 'show']);
+        // $this->middleware('permission:QuotationDelete', ['only' => 'destroy']);
+        // $this->middleware('auth');
     }
 
     public function index()

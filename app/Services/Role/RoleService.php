@@ -7,13 +7,17 @@ use Spatie\Permission\Models\Role;
 class RoleService implements RoleServiceInterface
 {
     public function store($request)
-    {        
-        return Role::create($request);
+    {   
+        $data = Role::create($request);
+        $data->givePermissionTo($request['permission_arr']);
+        return $data;
     }
 
     public function update($request, $id){
         $role = Role::where('id', $id)->first();
-        return $role->update($request);
+        $data = $role->update($request);
+        $data->syncPermissions($request['permission_arr']);
+        return $data;
     }
 
     public function delete($id)
