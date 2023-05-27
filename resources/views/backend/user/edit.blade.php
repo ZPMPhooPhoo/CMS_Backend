@@ -74,7 +74,7 @@
                             <div class="form-group row">
                                 <label for="roles" class="col-sm-2 col-form-label">Roles</label>
                                 <div class="col-sm-10">
-                                    <select class="custom-select" name="roles[]" id="roles[]" class="form-control">
+                                    <select class="custom-select" name="role_id[]" id="role_id[]" class="form-control">
                                         @foreach($roles as $role)
                                             <option value="{{ $role->id }}"
                                                 {{ in_array($role->name, $userRole) 

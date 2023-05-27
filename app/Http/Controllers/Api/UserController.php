@@ -76,7 +76,7 @@ class UserController extends Controller
             $data=$this->userService->customersWithName($request);
             return response()->json([
                 'status'=>'success',
-                'message'=>'pass your search customers',
+                'message'=>'Search Customers By Name!',
                 'data'=>$data
             ],200);
 

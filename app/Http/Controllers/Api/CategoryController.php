@@ -143,4 +143,21 @@ class CategoryController extends Controller
             ], 500);
         }
     }
+
+    public function categoriesByName(Request $request){
+        try{
+            $data=$this->categoryRepo->categoriesByName($request);
+            return response()->json([
+                'status'=>'success',
+                'message'=>'Search Category By Name!',
+                'data'=>$data
+            ],200);
+
+        }catch(Exception $e){
+            return response()->json([
+                'status'=>'error',
+                'message'=>$e->getMessage(),
+            ],500);
+        }
+    }
 }
