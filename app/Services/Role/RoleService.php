@@ -9,14 +9,15 @@ class RoleService implements RoleServiceInterface
     public function store($request)
     {   
         $data = Role::create($request);
-        $data->givePermissionTo($request['permission_arr']);
+
+        $data->givePermissionTo($request['permissions']);
         return $data;
     }
 
     public function update($request, $id){
         $role = Role::where('id', $id)->first();
         $data = $role->update($request);
-        $data->syncPermissions($request['permission_arr']);
+        $data->syncPermissions($request['permissions']);
         return $data;
     }
 

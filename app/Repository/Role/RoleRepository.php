@@ -14,12 +14,12 @@ class RoleRepository implements RoleRepoInterface
 
     public function show($id)
     {
-        $data = Role::where('id', $id)->first();
+        $role = Role::where('id', $id)->first();
         $permission = Permission::get();
-        $rolePermissions = $data->permissions->pluck('id')->toArray();
+        $rolePermissions = $role->permissions->pluck('id')->toArray();
         // return ($data,$permission,$rolePermissions);
-        return response()->json([
-            'data' => $data,
+        return ([
+            'role' => $role,
             'permissions' => $permission,
             'rolePermissions' => $rolePermissions
         ]);
