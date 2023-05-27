@@ -15,6 +15,12 @@ class UserController extends Controller
     public function __construct(UserRepoInterface $userRepo,UserServiceInterface $userService){
         $this->userRepo =$userRepo;
         $this->userService = $userService;
+        // $this->middleware('permission:UserList', ['only' => 'index']);
+        // $this->middleware('permission:UserCreate', ['only' => ['create', 'store']]);
+        // $this->middleware('permission:UserEdit', ['only' => ['edit', 'update']]);
+        // $this->middleware('permission:UserShow', ['only' => 'show']);
+        // $this->middleware('permission:UserDelete', ['only' => 'destroy']);
+        // $this->middleware('auth');
     }
     /**
      * Display a listing of the resource.
@@ -70,7 +76,7 @@ class UserController extends Controller
             $data=$this->userService->customersWithName($request);
             return response()->json([
                 'status'=>'success',
-                'message'=>'pass your search customers',
+                'message'=>'Search Customers By Name!',
                 'data'=>$data
             ],200);
 

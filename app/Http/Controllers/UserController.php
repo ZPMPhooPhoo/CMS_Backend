@@ -50,7 +50,7 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(UserRequest $request)
-    {        
+    {
         // try {
         //     $data = $request->validated();
         //     DB::beginTransaction();
@@ -77,8 +77,13 @@ class UserController extends Controller
             {
                 $data = $request->validated();
                 $data['password'] = Hash::make($data['password']);
+                $data['phone'] = ['09-123456789'];
+                $data['address'] = ['Yangon'];
+                $data['contact_person'] = ['Contact'];
+                $data['position'] = ['Position'];
                 $user = User::create($data);
-                $user->assignRole($data['roles']);
+                $user->assignRole($data['role_id']);
+                
             });
         } catch (Exception $e) {
             Log::channel('web_daily_error')->error("Admin Create", [$e->getMessage(), $e->getCode()]);
@@ -138,7 +143,12 @@ class UserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             //'password' => Hash::make($request->password)
-            'password' => $request->password
+            'password' => $request->password,
+            'phone' => '09-123456789',
+            'address'=> 'Yangon',
+            'contact_person'=>'contact',
+            'position'=>'position',
+            'role_id'=> $request->role_id
         ]);
 
         $user->syncRoles($request->validated('role_id'));

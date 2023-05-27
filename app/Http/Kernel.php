@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\Cors;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 use Spatie\Permission\Middlewares\PermissionMiddleware;
 
@@ -67,5 +68,6 @@ class Kernel extends HttpKernel
         'permission' => PermissionMiddleware::class,
         'role' => RoleMiddleware::class,
         'role_or_permission' => RoleOrPermissionMiddleware::class,
+        'cors' => Cors::class,
     ];
 }
