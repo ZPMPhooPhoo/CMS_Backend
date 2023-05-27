@@ -10,7 +10,6 @@ use App\Http\Controllers\Api\QuotationController;
 use App\Http\Controllers\Api\ReceiptController;
 use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\Api\UserController;
-use App\Http\Controllers\UserProjectController;
 use App\Models\Quotation;
 use App\Models\UserProject;
 use Illuminate\Http\Request;
@@ -48,6 +47,7 @@ Route::apiResource('receipts',ReceiptController::class)->middleware('auth:sanctu
 //Route::apiResource('userproject',UserProjectController::class)->middleware('auth:sanctum');
 
 Route::get('/userproject/{id}', [ProjectController::class, 'user_project'])->middleware('auth:sanctum');
+Route::get('/developerproject/{id}', [UserController::class, 'developer_project'])->middleware('auth:sanctum');
 Route::get('/customers' , [UserController::class, 'customers'])->middleware('auth:sanctum');
 
 Route::get('/customersWithName',[UserController::class, 'customersWithName'])->middleware('auth:sanctum');

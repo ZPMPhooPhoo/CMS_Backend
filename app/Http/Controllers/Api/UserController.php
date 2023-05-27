@@ -39,7 +39,7 @@ class UserController extends Controller
         }
     }
 
-    
+
 
     /**
      * Store a newly created resource in storage.
@@ -205,6 +205,23 @@ class UserController extends Controller
                 'status'=>'error',
                 'message'=>$e->getMessage(),
             ],500);
+        }
+    }
+
+
+    function developer_project($id){
+        try{
+            $data = $this->userRepo->developer_project(($id));
+            return response()->json([
+                'status' => 'success',
+                'message' => 'All Developers related to pjID Successfully!',
+                'data' => $data
+            ], 200);
+        }catch (Exception $e){
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage(),
+            ], 500);
         }
     }
 }
