@@ -14,13 +14,15 @@ class AuthController extends Controller
     public function signup(Request $request)
     {
         try {
-            $validateUser = Validator::make($request->all(),
-            [
-                'name' => 'required',
-                'email' => 'required|email',
-                'password' => 'required|confirmed',
-                'role_id' => 'required'
-            ]);
+            $validateUser = Validator::make(
+                $request->all(),
+                [
+                    'name' => 'required',
+                    'email' => 'required|email',
+                    'password' => 'required|confirmed',
+                    'role_id' => 'required'
+                ]
+            );
 
             if ($validateUser->fails()) {
                 return response()->json([
@@ -37,7 +39,7 @@ class AuthController extends Controller
                 'phone' => '09-123456789',
                 'address' => 'ygn',
                 'contact_person' => 'contact',
-                'position'=>'position',
+                'position' => 'position',
                 'role_id' => $request->role_id
             ]);
             $user->syncRoles($request['role_id']);
@@ -54,17 +56,20 @@ class AuthController extends Controller
             ], 500);
         }
     }
-    public function userUpdate(Request $request,$id){
-        try{
-            $user=User::where('id' ,$id)->first();
-            $validateUser = Validator::make($request->all(), 
-            [
-                'name' => 'required',
-                'email' => 'required|email',
-                'role_id' => 'required'
-            ]);
+    public function userUpdate(Request $request, $id)
+    {
+        try {
+            $user = User::where('id', $id)->first();
+            $validateUser = Validator::make(
+                $request->all(),
+                [
+                    'name' => 'required',
+                    'email' => 'required|email',
+                    'role_id' => 'required'
+                ]
+            );
 
-            if($validateUser->fails()){
+            if ($validateUser->fails()) {
                 return response()->json([
                     'status' => false,
                     'message' => 'validation error',
@@ -73,17 +78,17 @@ class AuthController extends Controller
             }
 
             // $user = User::updated([
-                $user->name = $request->name;
-                $user->email = $request->email;
-                $user->phone = "09912345679";
-                $user->address = 'ygn';
-                $user->contact_person = 'contact';
-                $user->position ='position';
-                $user->role_id =$request->role_id;
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->phone = "09912345679";
+            $user->address = 'ygn';
+            $user->contact_person = 'contact';
+            $user->position = 'position';
+            $user->role_id = $request->role_id;
 
-                $user->syncRoles($request['role_id']);
-                $user->update();
-               
+            $user->syncRoles($request['role_id']);
+            $user->update();
+
             return response()->json([
                 'status' => true,
                 'message' => 'User Created Successfully!',
@@ -100,13 +105,15 @@ class AuthController extends Controller
     public function signin(Request $request)
     {
         try {
-            $validateUser = Validator::make($request->all(),
-            [
-                'email' => 'required|email',
-                'password' => 'required',
-            ]);
+            $validateUser = Validator::make(
+                $request->all(),
+                [
+                    'email' => 'required|email',
+                    'password' => 'required',
+                ]
+            );
 
-            if($validateUser->fails()){
+            if ($validateUser->fails()) {
                 return response()->json([
                     'status' => false,
                     'message' => 'validation error',
@@ -114,7 +121,7 @@ class AuthController extends Controller
                 ], 401);
             }
 
-            if(!Auth::guard('web')->attempt($request->only(['email', 'password']))){
+            if (!Auth::guard('web')->attempt($request->only(['email', 'password']))) {
                 return response()->json([
                     'status' => false,
                     'message' => 'Email & Password does not match with our record.',
@@ -126,9 +133,9 @@ class AuthController extends Controller
             return response()->json([
                 'status' => true,
                 'message' => 'User Logged In Successfully!',
+                'role_id' => $user->role_id,
                 'token' => $user->createToken("API TOKEN")->plainTextToken
             ], 200);
-
         } catch (\Throwable $th) {
             return response()->json([
                 'status' => false,

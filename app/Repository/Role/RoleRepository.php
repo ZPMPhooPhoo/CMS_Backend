@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Repository\Role;
+
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
@@ -16,7 +17,7 @@ class RoleRepository implements RoleRepoInterface
     {
         $role = Role::where('id', $id)->first();
         $permission = Permission::get();
-        $rolePermissions = $role->permissions->pluck('id')->toArray();
+        $rolePermissions = $role->permissions->pluck('name')->toArray();
         return ([
             'role' => $role,
             'permissions' => $permission,
