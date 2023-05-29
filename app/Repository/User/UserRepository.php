@@ -20,6 +20,18 @@ class UserRepository implements UserRepoInterface
         $data=User::where('role_id' , 5)->get();
         return $data;
     }
+
+    public function customersByMonth()
+ {
+    $customersByMonth = User::where('role_id', 5)
+        ->selectRaw('DATE_FORMAT(created_at, "%Y-%m") as month, COUNT(*) as customer_count')
+        ->groupBy('month')
+        ->orderBy('month')
+        ->get();
+
+    return $customersByMonth;
+ }
+
     public function developers()
     {
         $data = User::where('role_id' , 4)->get();

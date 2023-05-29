@@ -2,6 +2,7 @@
 
 namespace App\Repository\Project;
 use App\Models\Project;
+// use Carbon\Carbon;
 use App\Models\User;
 use App\Models\UserProject;
 use Illuminate\Support\Facades\DB;
@@ -14,11 +15,22 @@ class PrjRepository implements PrjRepoInterface
         return $data;
     }
 
+    public function prj_chart()
+    {
+        $projects = Project::selectRaw('DATE_FORMAT(created_at, "%Y-%m") as month, COUNT(*) as count')
+        ->groupBy('month')
+        ->orderBy('month')
+        ->get();
+
+        return $projects;
+    }
+
     public function show($id)
     {
         $data = Project::with('category')->where('id', $id)->first();
         return $data;
     }
+
     public function user_project($id)
     {
         // $userIds = DB::table('user_projects')
@@ -40,5 +52,4 @@ class PrjRepository implements PrjRepoInterface
         // }
         return $data;
     }
-
 }
