@@ -47,6 +47,7 @@ Route::middleware(['cors', 'auth:sanctum'])->group(function () {
     Route::apiResource('invoices', InvoiceController::class);
     Route::apiResource('receipts', ReceiptController::class);
     Route::get('/userproject/{id}', [ProjectController::class, 'user_project']);
+    Route::get('/developerproject/{id}', [UserController::class, 'developer_project']);
     Route::get('/customers', [UserController::class, 'customers']);
     Route::get('/customersWithName', [UserController::class, 'customersWithName']);
     Route::get('/userAdminWithName', [UserController::class, 'userAdminWithName']);

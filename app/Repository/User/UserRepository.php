@@ -27,11 +27,10 @@ class UserRepository implements UserRepoInterface
     }
     public function developer_project($project_id)
     {
-        $data = User::whereHas('project' , function($query) use ($project_id) {
-            $query->where('project_id' , $project_id);
-        })->get();
+        // $data = User::whereHas('project' , function($query) use ($project_id) {
+        //     $query->where('project_id' , $project_id);
+        // })->get();
+        $data = User::where('id' , $project_id)->get();
         return $data;
     }
 }
-
-?>
