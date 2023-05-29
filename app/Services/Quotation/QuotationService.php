@@ -4,6 +4,7 @@ namespace App\Services\Quotation;
 // use Exception;
 use App\Models\Quotation;
 use App\Services\Quotation\QuotationServiceInterface;
+use Illuminate\Support\Facades\Storage;
 
 class QuotationService implements QuotationServiceInterface
 {
@@ -18,7 +19,7 @@ class QuotationService implements QuotationServiceInterface
         }
 
         $fileName = $request['quotation']->getClientOriginalName();
-        $request['quotation']->storeAs('quotations', $fileName);
+        $request['quotation']->storeAs('public/quotations', $fileName);
 
         $request['quotation'] = $fileName;
         $request['is_agree']=isset($request['is_agree']) ? 1:0;
@@ -35,28 +36,37 @@ class QuotationService implements QuotationServiceInterface
     return $data;
 }
 
+ public function update($request, $id){
 
-
-    public function update($request, $id){
         $quotation = Quotation::where('id', $id)->first();
-        if($request['quotation'] ?? false){
+        if (isset($request['quotation'])) {
             $extension = $request['quotation']->getClientOriginalExtension();
             $allowedExtensions = ['jpeg', 'jpg', 'png', 'pdf'];
 
             if (!in_array($extension, $allowedExtensions)) {
-                return false;
+                return false; // or handle the invalid file extension error in an appropriate way
             }
 
             $fileName = $request['quotation']->getClientOriginalName();
-            $request['quotation']->storeAs('quotations', $fileName);
-            $request->merge(['quotation' => $fileName]);
+            $request['quotation']->storeAs('public/quotations', $fileName);
+
+            $request['quotation'] = $fileName;
+            $request['is_agree']=isset($request['is_agree']) ? 1:0;
         }
         return $quotation->update($request);
     }
 
     public function delete($id)
-    {
-        $data = Quotation::where('id', $id)->first();
-        return $data->delete();
+{
+    $quotation = Quotation::findOrFail($id);
+
+    if (!empty($quotation->quotation)) {
+        Storage::delete('public/quotations/' . $quotation->quotation);
     }
+
+    $quotation->delete();
+
+    return true;
+}
+
 }

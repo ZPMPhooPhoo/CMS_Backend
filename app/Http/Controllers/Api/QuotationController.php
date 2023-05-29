@@ -84,7 +84,6 @@ class QuotationController extends Controller
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage(),
-                'data' => $data
             ], 500);
         }
     }
@@ -109,7 +108,6 @@ class QuotationController extends Controller
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage(),
-                'data' => $data
             ], 500);
         }
     }
@@ -133,7 +131,6 @@ class QuotationController extends Controller
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage(),
-                'data' => $data
             ], 500);
         }
     }

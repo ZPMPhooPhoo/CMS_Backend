@@ -152,4 +152,26 @@ class UserController extends Controller
             ],500);
         }
     }
+
+    public function customersByMonth()
+    {
+        try{
+            $data=$this->userRepo->customersByMonth();
+            return response()->json([
+                'status' => 'Success',
+                'message' => 'Customer By Month Successfully!',
+                'data' => $data
+            ],200);
+
+        }catch(Exception $e)
+        {
+            return response()->json([
+                'status'=>'error',
+                'message'=>$e->getMessage(),
+            ],500);
+        }
+    }
+
+
+
 }
