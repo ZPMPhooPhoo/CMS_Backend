@@ -29,7 +29,7 @@ class UserService implements UserServiceInterface
         return $data;
     }
     public function userAdminWithName($request){
-        $data =User::where('name','like','%'.$request->searchuser.'%')->get();
+        $data =User::where('name','like','%'.$request->searchuser.'%')->where('role_id' , '!=' , 5 )->get();
 
         return $data;
     }

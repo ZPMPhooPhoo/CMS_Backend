@@ -7,6 +7,7 @@
         public function show($id);
         public function customers();
         public function developers();
+        public function developer_project($project_id);
 
     }
 ?>
