@@ -16,4 +16,10 @@ class CategoryRepository implements CategoryRepoInterface
         $data = Category::where('id', $id)->first();
         return $data;
     }
+
+    public function categoriesByName($request){
+        $data = Category::where('category', 'like', '%' . $request->searchCategory . '%')
+        ->get();
+        return $data;
+    }
 }

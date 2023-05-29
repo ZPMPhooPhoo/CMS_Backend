@@ -73,7 +73,7 @@
                             <div class="form-group row">
                                 <label for="roles" class="col-sm-2 col-form-label">Roles</label>
                                 <div class="col-sm-10">
-                                    <select class="custom-select form-control" name="roles[]" id="roles[]">
+                                    <select class="custom-select form-control" name="role_id[]" id="role_id[]">
                                         @foreach ($roles as $role)
                                             <option> {{ $role }}</option>
                                         @endforeach

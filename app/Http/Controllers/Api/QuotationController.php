@@ -21,6 +21,12 @@ class QuotationController extends Controller
     public function __construct(QuotationRepoInterface $quotationRepo,QuotationServiceInterface $quotationService){
         $this->quotationRepo = $quotationRepo;
         $this->quotationService = $quotationService;
+        // $this->middleware('permission:QuotationList', ['only' => 'index']);
+        // $this->middleware('permission:QuotationCreate', ['only' => ['create', 'store']]);
+        // $this->middleware('permission:QuotationEdit', ['only' => ['edit', 'update']]);
+        // $this->middleware('permission:QuotationShow', ['only' => 'show']);
+        // $this->middleware('permission:QuotationDelete', ['only' => 'destroy']);
+        // $this->middleware('auth');
     }
 
     public function index()
@@ -48,22 +54,22 @@ class QuotationController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(QuotationRequest $request)
-{
-    try {
-        $data = $this->quotationService->store($request->validated());
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Quotation Created Successfully!',
-            'data' => $data
-        ], 200);
-    } catch (Exception $e) {
-        return response()->json([
-            'status' => 'error',
-            'message' => $e->getMessage(),
-        ], 500);
+    {
+        try {
+            $data = $this->quotationService->store($request->validated());
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Quotation Created Successfully!',
+                'data' => $data
+            ], 200);
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage(),
+                
+            ], 500);
+        }
     }
-}
-
 
     /**
      * Display the specified resource.

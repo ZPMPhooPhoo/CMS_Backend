@@ -21,6 +21,12 @@ class ReceiptController extends Controller
     public function __construct(ReceiptRepoInterface $receiptRepo,ReceiptServiceInterface $receiptService){
         $this->receiptRepo = $receiptRepo;
         $this->receiptService = $receiptService;
+        // $this->middleware('permission:ReceiptList', ['only' => 'index']);
+        // $this->middleware('permission:ReceiptCreate', ['only' => ['create', 'store']]);
+        // $this->middleware('permission:ReceiptEdit', ['only' => ['edit', 'update']]);
+        // $this->middleware('permission:ReceiptShow', ['only' => 'show']);
+        // $this->middleware('permission:ReceiptDelete', ['only' => 'destroy']);
+        // $this->middleware('auth');
     }
     public function index()
     {

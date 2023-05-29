@@ -15,12 +15,22 @@ class UserService implements UserServiceInterface
     public function update($request, $id)
     {
         $user=User::where('id' ,$id)->first();
-        $request['password'] = Hash::make($request['password']);
         $user->syncRoles($request['role_id']);
         return $user->update($request);
     }
     public function delete($id){
         $data=User::where('id',$id)->first();
         return $data->delete();
+    }
+    public function customersWithName($request){
+        $data = User::where('name', 'like', '%' . $request->searchuser . '%')
+        ->where('role_id', 5)
+        ->get();
+        return $data;
+    }
+    public function userAdminWithName($request){
+        $data =User::where('name','like','%'.$request->searchuser.'%')->where('role_id' , '!=' , 5 )->get();
+
+        return $data;
     }
 }

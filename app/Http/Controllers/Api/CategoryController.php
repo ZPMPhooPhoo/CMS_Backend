@@ -21,6 +21,12 @@ class CategoryController extends Controller
     public function __construct(CategoryRepoInterface $cataegoryRepo,CategoryServiceInterface $categoryService){
         $this->categoryRepo = $cataegoryRepo;
         $this->categoryService = $categoryService;
+        // $this->middleware('permission:CategoryList', ['only' => 'index']);
+        // $this->middleware('permission:CategoryCreate', ['only' => ['create', 'store']]);
+        // $this->middleware('permission:CategoryEdit', ['only' => ['edit', 'update']]);
+        // $this->middleware('permission:CategoryShow', ['only' => 'show']);
+        // $this->middleware('permission:CategoryDelete', ['only' => 'destroy']);
+        // $this->middleware('auth');
     }
 
     public function index()
@@ -135,6 +141,23 @@ class CategoryController extends Controller
                 'message' => $e->getMessage(),
                 'data' => $data
             ], 500);
+        }
+    }
+
+    public function categoriesByName(Request $request){
+        try{
+            $data=$this->categoryRepo->categoriesByName($request);
+            return response()->json([
+                'status'=>'success',
+                'message'=>'Search Category By Name!',
+                'data'=>$data
+            ],200);
+
+        }catch(Exception $e){
+            return response()->json([
+                'status'=>'error',
+                'message'=>$e->getMessage(),
+            ],500);
         }
     }
 }

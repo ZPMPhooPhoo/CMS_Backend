@@ -30,6 +30,11 @@ class User extends Authenticatable
         'role_id'
     ];
 
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -49,8 +54,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    // public function project()
-    // {
-    //     return $this->belongsToMany(Project::class, 'user_projects');
-    // }
+    public function project()
+    {
+        return $this->belongsToMany(Project::class, 'user_projects')->withPivot('project_id');
+    }
 }

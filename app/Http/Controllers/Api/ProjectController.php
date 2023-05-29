@@ -21,6 +21,12 @@ class ProjectController extends Controller
     public function __construct(PrjRepoInterface $prjRepo,PrjServiceInterface $prjService){
         $this->prjRepo = $prjRepo;
         $this->prjService = $prjService;
+        // $this->middleware('permission:ProjectList', ['only' => 'index']);
+        // $this->middleware('permission:ProjectCreate', ['only' => ['create', 'store']]);
+        // $this->middleware('permission:ProjectEdit', ['only' => ['edit', 'update']]);
+        // $this->middleware('permission:ProjectShow', ['only' => 'show']);
+        // $this->middleware('permission:ProjectDelete', ['only' => 'destroy']);
+        // $this->middleware('auth');
     }
 
     public function index()
@@ -152,4 +158,32 @@ class ProjectController extends Controller
             ], 500);
         }
     }
+
+
+    // public function projectsActive(Request $request){
+    //     try{
+    //         $data = $this->prjService->projectsActive($request);
+    //         return response()->json([
+    //             'status' => 'success',
+    //             'message' => 'Project maintain Successfully!',
+    //             'data' => $data
+    //         ], 200);
+    //     }catch(Exception $e){
+    function user_project($id){
+        try{
+            $data = $this->prjRepo->user_project($id);
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Project Deleted Successfully!',
+                'data' => $data
+            ], 200);
+        }catch (Exception $e){
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage(),
+            ], 500);
+        }
+    }
 }
+
+

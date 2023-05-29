@@ -21,6 +21,12 @@ class InvoiceController extends Controller
     public function __construct(InvoiceRepoInterface $invoiceRepo,InvoiceServiceInterface $invoiceService){
         $this->invoiceRepo = $invoiceRepo;
         $this->invoiceService = $invoiceService;
+        // $this->middleware('permission:InvoiceList', ['only' => 'index']);
+        // $this->middleware('permission:InvoiceCreate', ['only' => ['create', 'store']]);
+        // $this->middleware('permission:InvoiceEdit', ['only' => ['edit', 'update']]);
+        // $this->middleware('permission:InvoiceShow', ['only' => 'show']);
+        // $this->middleware('permission:InvoiceDelete', ['only' => 'destroy']);
+        // $this->middleware('auth');
     }
 
     public function index()

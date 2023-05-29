@@ -3,11 +3,13 @@ namespace App\Services\Project;
 
 use App\Models\Project;
 use App\Services\Project\PrjServiceInterface;
+use PDO;
 
 class PrjService implements PrjServiceInterface
 {
     public function store($request)
     {   
+        //$request['is_']=isset($request['is_agree']) ? 1:0;
         $data = Project::create($request);
         // $data = Project::create([
         //     'title' => $request['title'],
@@ -32,5 +34,10 @@ class PrjService implements PrjServiceInterface
     {
         $data = Project::where('id', $id)->first();
         return $data->delete();
+    }
+
+    public function projectsActive($request){
+        $data=Project::where('maintenance_active',$request->maintain_active)->get();
+        return $data;
     }
 }
