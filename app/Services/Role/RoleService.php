@@ -2,11 +2,14 @@
 namespace App\Services\Role;
 
 use App\Services\Role\RoleServiceInterface;
+use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class RoleService implements RoleServiceInterface
 {
     public function store($request)
+
     {   
         $data = Role::create($request);
 
