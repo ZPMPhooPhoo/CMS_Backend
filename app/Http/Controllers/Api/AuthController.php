@@ -126,6 +126,7 @@ class AuthController extends Controller
             return response()->json([
                 'status' => true,
                 'message' => 'User Logged In Successfully!',
+                'role_id' => $user->role_id,
                 'token' => $user->createToken("API TOKEN")->plainTextToken
             ], 200);
 

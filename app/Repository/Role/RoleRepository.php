@@ -16,7 +16,7 @@ class RoleRepository implements RoleRepoInterface
     {
         $role = Role::where('id', $id)->first();
         $permission = Permission::get();
-        $rolePermissions = $role->permissions->pluck('id')->toArray();
+        $rolePermissions = $role->permissions->pluck('name')->toArray();
         // return ($data,$permission,$rolePermissions);
         return ([
             'role' => $role,
