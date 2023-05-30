@@ -21,6 +21,12 @@ class ContractController extends Controller
     public function __construct(ContractRepoInterface $contractRepo,ContractServiceInterface $contractService){
         $this->contractRepo = $contractRepo;
         $this->contractService = $contractService;
+        // $this->middleware('permission:ContractList', ['only' => 'index']);
+        // $this->middleware('permission:ContractCreate', ['only' => ['create', 'store']]);
+        // $this->middleware('permission:ContractEdit', ['only' => ['edit', 'update']]);
+        // $this->middleware('permission:ContractShow', ['only' => 'show']);
+        // $this->middleware('permission:ContractDelete', ['only' => 'destroy']);
+        // $this->middleware('auth');
     }
 
     public function index()
@@ -40,6 +46,8 @@ class ContractController extends Controller
             ], 500);
         }
     }
+
+
 
     /**
      * Store a newly created resource in storage.

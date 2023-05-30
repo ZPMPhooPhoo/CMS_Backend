@@ -56,6 +56,6 @@ class User extends Authenticatable
 
     public function project()
     {
-        return $this->belongsToMany(Project::class, 'user_projects');
+        return $this->belongsToMany(Project::class, 'user_projects')->withPivot('project_id');
     }
 }

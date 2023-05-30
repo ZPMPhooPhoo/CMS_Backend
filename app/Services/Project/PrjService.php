@@ -9,6 +9,7 @@ class PrjService implements PrjServiceInterface
 {
     public function store($request)
     {   
+        //$request['is_']=isset($request['is_agree']) ? 1:0;
         $data = Project::create($request);
         // $data = Project::create([
         //     'title' => $request['title'],

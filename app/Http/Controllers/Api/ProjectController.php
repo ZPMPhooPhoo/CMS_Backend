@@ -21,6 +21,12 @@ class ProjectController extends Controller
     public function __construct(PrjRepoInterface $prjRepo,PrjServiceInterface $prjService){
         $this->prjRepo = $prjRepo;
         $this->prjService = $prjService;
+        // $this->middleware('permission:ProjectList', ['only' => 'index']);
+        // $this->middleware('permission:ProjectCreate', ['only' => ['create', 'store']]);
+        // $this->middleware('permission:ProjectEdit', ['only' => ['edit', 'update']]);
+        // $this->middleware('permission:ProjectShow', ['only' => 'show']);
+        // $this->middleware('permission:ProjectDelete', ['only' => 'destroy']);
+        // $this->middleware('auth');
     }
 
     public function index()
@@ -37,6 +43,24 @@ class ProjectController extends Controller
                 'status' => 'error',
                 'message' => $e->getMessage(),
             ], 500);
+        }
+    }
+
+    public function PrjChart(){
+        try{
+            $data=$this->prjRepo->prj_chart();
+            return response()->json([
+                'status'=> 'success',
+                'message'=> 'Project By Month Chart Data Successfully',
+                'data'=>$data
+            ],200);
+
+        }catch(Exception $e){
+            return response()->json([
+                'status' =>'error',
+                'message' => $e->getMessage(),
+            ],500);
+
         }
     }
 
