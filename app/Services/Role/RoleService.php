@@ -2,13 +2,18 @@
 namespace App\Services\Role;
 
 use App\Services\Role\RoleServiceInterface;
+use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class RoleService implements RoleServiceInterface
 {
     public function store($request)
-    {        
-        return Role::create($request);
+    {  
+        $role =Role::create($request);
+        $permission =Permission::whereIn('id', $request->input('permissions'))->get();
+        $role->givePermissionTo($permission);
+        return $role;
     }
 
     public function update($request, $id){

@@ -9,6 +9,7 @@ use App\Services\Role\RoleServiceInterface;
 use Exception;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Role_has_permission;
 
 class RoleController extends Controller
 {
@@ -26,17 +27,21 @@ class RoleController extends Controller
     public function index()
     {
         try {
-            $data = $this->roleRepo->get();
-            return response()->json([
-                'status' => 'success',
-                'message' => 'Role List!',
-                'data' => $data
-            ], 200);
+            $response = $this->roleRepo->get();
+        $data = $response['data'];
+        $rolePermissions = $response['rolePermissions'];
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Role List!',
+            'data' => $data,
+            'rolePermissions' => $rolePermissions
+        ], 200);
         } catch (Exception $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage(),
-                'data' => $data
+                'data' => "hello error"
             ], 500);
         }
     }
