@@ -92,14 +92,15 @@ class RoleAndPermissionSeeder extends Seeder
         $user_edit = Permission::create(['name' => 'user-edit']);
         // $user_show = Permission::create(['name' => 'userShow']);
         $user_delete = Permission::create(['name' => 'user-delete']);
+        $user_profile = Permission::create(['name' => 'user-profile']);
 
         // $dashboard, $widget, $datatable, $admin_list, $permission_list, $permission_create, $permission_edit, $permission_show, $permission_delete, $role_list, $role_create, $role_edit, $role_show, $role_delete, $category_list, $category_create, $category_edit, $category_show, $category_delete, $contract_list, $contract_create, $contract_edit, $contract_show, $contract_delete, $invoice_list, $invoice_create, $invoice_edit, $invoice_show, $invoice_delete, $project_list, $project_create, $project_edit, $project_show, $project_delete, $quotation_list, $quotation_create, $quotation_edit, $quotation_show, $quotation_delete, $receipt_list, $receipt_create, $receipt_edit, $receipt_show, $receipt_delete, $users, $user_create, $user_edit, $user_show, $user_delete
 
-        $super_admin->givePermissionTo([$dashboard, $category_list, $category_create, $category_edit, $contract_edit, $quotation_create, $quotation_edit, $users, $user_create, $user_edit, $user_delete, $client_lists, $client_project_lists, $projects, $project_detail, $add_client_project, $services, $client_create, $client_edit, $client_delete, $quotation]);
+        $super_admin->givePermissionTo([$dashboard, $category_list, $category_create, $category_edit, $contract_edit, $quotation_create, $quotation_edit, $users, $user_create, $user_edit, $user_delete, $user_profile, $client_lists, $client_project_lists, $projects, $project_detail, $add_client_project, $services, $client_create, $client_edit, $client_delete, $quotation]);
 
-        $admin->givePermissionTo([$dashboard, $category_list, $category_create, $category_edit, $contract_edit, $quotation_create, $quotation_edit, $users, $user_create, $user_edit, $user_delete, $client_lists, $client_project_lists, $projects, $project_detail, $add_client_project, $services, $client_create, $client_edit, $client_delete, $quotation]);
+        $admin->givePermissionTo([$dashboard, $category_list, $category_create, $category_edit, $contract_edit, $quotation_create, $quotation_edit, $users, $user_create, $user_edit, $user_delete, $user_profile, $client_lists, $client_project_lists, $projects, $project_detail, $add_client_project, $services, $client_create, $client_edit, $client_delete, $quotation]);
 
-        $manager->givePermissionTo([$dashboard, $category_list, $category_create, $category_edit, $contract_edit, $quotation_create, $quotation_edit, $users, $user_create, $user_edit, $user_delete, $client_lists, $client_project_lists, $projects, $project_detail, $add_client_project, $services, $client_create, $client_edit, $client_delete, $quotation]);
+        $manager->givePermissionTo([$dashboard, $category_list, $category_create, $category_edit, $contract_edit, $quotation_create, $quotation_edit, $users, $user_create, $user_edit, $user_delete, $user_profile, $client_lists, $client_project_lists, $projects, $project_detail, $add_client_project, $services, $client_create, $client_edit, $client_delete, $quotation]);
 
         $developer->givePermissionTo([$dashboard, $category_list, $category_create, $category_edit, $contract_edit, $quotation_create, $quotation_edit, $client_lists, $client_project_lists, $projects, $project_detail, $add_client_project, $services, $client_create, $client_edit, $client_delete, $quotation]);
 
