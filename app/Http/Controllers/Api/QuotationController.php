@@ -17,8 +17,9 @@ class QuotationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    private $quotationRepo,$quotationService;
-    public function __construct(QuotationRepoInterface $quotationRepo,QuotationServiceInterface $quotationService){
+    private $quotationRepo, $quotationService;
+    public function __construct(QuotationRepoInterface $quotationRepo, QuotationServiceInterface $quotationService)
+    {
         $this->quotationRepo = $quotationRepo;
         $this->quotationService = $quotationService;
         // $this->middleware('permission:QuotationList', ['only' => 'index']);
@@ -60,13 +61,13 @@ class QuotationController extends Controller
             return response()->json([
                 'status' => 'success',
                 'message' => 'Quotation Created Successfully!',
-                'data' => $data
+                'data' => $data->id
             ], 200);
         } catch (Exception $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage(),
-                
+
             ], 500);
         }
     }
@@ -104,7 +105,7 @@ class QuotationController extends Controller
     public function update(QuotationRequest $request, $id)
     {
         try {
-            $data = $this->quotationService->update($request->validated(),$id);
+            $data = $this->quotationService->update($request->validated(), $id);
             return response()->json([
                 'status' => 'success',
                 'message' => 'Quotation Updated Successfully!',

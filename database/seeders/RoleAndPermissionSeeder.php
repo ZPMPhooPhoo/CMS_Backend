@@ -34,6 +34,7 @@ class RoleAndPermissionSeeder extends Seeder
         $permission_delete = Permission::create(['name' => 'permissionDelete']);
 
         $role_list= Permission::create(['name' => 'roleList']);
+        
         $role_create = Permission::create(['name' => 'roleCreate']);
         $role_edit = Permission::create(['name' => 'roleEdit']);
         $role_show = Permission::create(['name' => 'roleShow']);
@@ -45,7 +46,7 @@ class RoleAndPermissionSeeder extends Seeder
         $users_show = Permission::create(['name' => 'userShow']);
         $users_delete = Permission::create(['name' => 'userDelete']);
 
-        
+
         $client_lists = Permission::create(['name' => 'client-lists']);
         $client_project_lists = Permission::create(['name' => 'client-project-lists']);
         $projects = Permission::create(['name' => 'projects']);
@@ -64,7 +65,9 @@ class RoleAndPermissionSeeder extends Seeder
         // $category_delete = Permission::create(['name' => 'category-delete']);
 
         // $contract_list = Permission::create(['name' => 'contractList']);
-        $contract_create = Permission::create(['name' => 'contractCreate']);
+
+        // $contract_create = Permission::create(['name' => 'contractCreate']);
+        $contract_create = Permission::create(['name' => 'contract-create']);
         $contract_edit = Permission::create(['name' => 'contract-edit']);
         // $contract_show = Permission::create(['name' => 'contractShow']);
         // $contract_delete = Permission::create(['name' => 'contractDelete']);
@@ -109,7 +112,7 @@ class RoleAndPermissionSeeder extends Seeder
 
         $manager->givePermissionTo([$dashboard, $category_list, $category_create, $category_edit, $contract_edit, $quotation_create, $quotation_edit, $user, $user_create, $user_edit, $user_delete, $user_profile, $client_lists, $client_project_lists, $projects, $project_detail, $add_client_project, $services, $client_create, $client_edit, $client_delete, $quotation]);
 
-        $developer->givePermissionTo([$dashboard, $category_list, $category_create, $category_edit, $contract_edit, $quotation_create, $quotation_edit, $client_lists, $client_project_lists, $projects, $project_detail, $add_client_project, $services, $client_create, $client_edit, $client_delete, $quotation]);
+        $developer->givePermissionTo([$dashboard, $category_list, $category_create, $category_edit, $contract_edit, $quotation_create, $quotation_edit, $client_lists, $client_project_lists, $projects, $project_detail, $add_client_project, $services, $client_create, $client_edit, $client_delete, $quotation, $contract_create]);
 
         $customer->givePermissionTo([]);
     }
