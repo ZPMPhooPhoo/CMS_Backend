@@ -20,6 +20,7 @@ class RoleService implements RoleServiceInterface
     public function update($request, $id){
         $role = Role::where('id', $id)->first();
         $data = $role->update($request);
+        dd($request);
         $data->syncPermissions($request['permissions']);
         return $data;
     }

@@ -74,11 +74,11 @@
                                 <label for="roles" class="col-sm-2 col-form-label">Roles</label>
                                 <div class="col-sm-10">
                                     <select class="custom-select form-control" name="role_id[]" id="role_id[]">
-                                        @foreach ($roles as $role)
+                                        @foreach ($role_id as $role)
                                             <option> {{ $role }}</option>
                                         @endforeach
                                         
-                                        @if ($errors->has('roles')) <div class="error text-danger">{{ $errors->first('roles') }}</div>
+                                        @if ($errors->has('role_id')) <div class="error text-danger">{{ $errors->first('role_id') }}</div>
                                         @endif
                                     </select>                                    
                                 </div>

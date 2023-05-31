@@ -16,9 +16,9 @@ class UserController extends Controller
     {
         $this->userRepo = $userRepo;
         $this->userService = $userService;
-        // $this->middleware('permission:UserList', ['only' => 'index']);
+        // $this->middleware('permission:users', ['only' => 'index']);
         // $this->middleware('permission:UserCreate', ['only' => ['create', 'store']]);
-        // $this->middleware('permission:UserEdit', ['only' => ['edit', 'update']]);
+        // $this->middleware('permission:userEdit', ['only' => ['edit', 'update']]);
         // $this->middleware('permission:UserShow', ['only' => 'show']);
         // $this->middleware('permission:UserDelete', ['only' => 'destroy']);
         // $this->middleware('auth');

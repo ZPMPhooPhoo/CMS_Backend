@@ -39,13 +39,16 @@ class RoleRepository implements RoleRepoInterface
 
         $rolePermissions = $role->permissions->pluck('name')->toArray();
 
+        $rolePermission = $role->permissions->pluck('id')->toArray();
+
         //$rolePermissions = $role->permissions->pluck('id')->toArray();
         // return ($data,$permission,$rolePermissions);
 
         return ([
             'role' => $role,
             'permissions' => $permission,
-            'rolePermissions' => $rolePermissions
+            'rolePermissions' => $rolePermissions,
+            'rolePermission' => $rolePermission
         ]);
     }
 }

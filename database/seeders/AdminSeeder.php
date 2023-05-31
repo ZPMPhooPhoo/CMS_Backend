@@ -66,8 +66,6 @@ class AdminSeeder extends Seeder
             'role_id' => '4'
         ]);
 
-
-
         $superadmin->assignRole('SuperAdmin');
         $admin->assignRole('Admin');
         $manager->assignRole('Manager');

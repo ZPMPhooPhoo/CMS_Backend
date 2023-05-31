@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
-use App\Models\Category;
 use App\Repository\Category\CategoryRepoInterface;
 use App\Services\Category\CategoryServiceInterface;
 use Exception;

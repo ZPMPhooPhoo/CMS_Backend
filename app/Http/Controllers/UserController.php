@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Request;
 use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
@@ -39,8 +40,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        $roles = Role::pluck('name','name')->all();
-        return view('backend.user.create', compact('roles'));
+        $role_id = Role::pluck('name','name')->all();
+        return view('backend.user.create', compact('role_id'));
     }
 
     /**
@@ -49,46 +50,47 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UserRequest $request)
+    public function store(Request $request)
     {
-        // try {
-        //     $data = $request->validated();
-        //     DB::beginTransaction();
-        //     // $result = array_merge($data, ['name' => 'phoomon', 'email' => 'phoomon@gmail.com', 'password' => Hash::make('admin@123'),'roles' =>1]);
-        //     // $user = User::create($result);
-        //     //DB::commit();
-
-        //     $user = User::create([
-        //         'name' => $data['name'],
-        //         'email' => $data['email'],
-        //         'password' => Hash::make($data['password'])      
-        //     ]);
-        //     $user->assignRole($request->validated('roles'));
-
-        //     DB::commit();
-        // } catch (Exception $e) {
-        //     DB::rollBack();
-        //     Log::channel('web_daily_error')->error("Admin Create", [$e->getMessage(), $e->getCode()]);
-        //     return Redirect::back()->withErrors($e->getMessage());
-        // }
-        
         try {
-            DB::transaction(function() use($request)
-            {
-                $data = $request->validated();
-                $data['password'] = Hash::make($data['password']);
-                $data['phone'] = ['09-123456789'];
-                $data['address'] = ['Yangon'];
-                $data['contact_person'] = ['Contact'];
-                $data['position'] = ['Position'];
-                $user = User::create($data);
-                $user->assignRole($data['role_id']);
-                
-            });
+            $data = $request->all();
+            DB::beginTransaction();
+            $result = array_merge($data, ['name' => 'phoomon', 'email' => 'phoomon@gmail.com', 'password' => Hash::make('admin@123'), 'phone' => '09-123456789', 'address' => 'address', 'contact_person' => 'contact', 'position' => 'position', 'role_id'=> 1]);
+            $user = User::create($result);
+            $user->assignRole(1);
+            //DB::commit();
+
+            // $user = User::create([
+            //     'name' => $data['name'],
+            //     'email' => $data['email'],
+            //     'password' => Hash::make($data['password'])      
+            // ]);
+            // $user->assignRole($request->validated('roles'));
+
+            DB::commit();
         } catch (Exception $e) {
+            DB::rollBack();
             Log::channel('web_daily_error')->error("Admin Create", [$e->getMessage(), $e->getCode()]);
             return Redirect::back()->withErrors($e->getMessage());
         }
+        
+        // try {
+        //     DB::transaction(function() use($request)
+        //     {
+        //         $data = $request->validated();
+        //         $data['password'] = Hash::make($data['password']);
+        //         $data['phone'] = ['09-123456789'];
+        //         $data['address'] = ['Yangon'];
+        //         $data['contact_person'] = ['Contact'];
+        //         $data['position'] = ['Position'];
+        //         $user = User::create($data);
+        //         $user->assignRole($data['role_id']);
+                
+        //     });
+        // } catch (Exception $e) {
+        //     Log::channel('web_daily_error')->error("Admin Create", [$e->getMessage(), $e->getCode()]);
+        //     return Redirect::back()->withErrors($e->getMessage());
+        // }
         return redirect()->route('user.index');
     }
 
