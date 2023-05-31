@@ -2,7 +2,6 @@
 
 namespace App\Http;
 
-use App\Http\Middleware\Cors;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 use Spatie\Permission\Middlewares\PermissionMiddleware;
 
@@ -46,7 +45,6 @@ class Kernel extends HttpKernel
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \Fruitcake\Cors\HandleCors::class,
-
         ],
     ];
 
@@ -70,6 +68,6 @@ class Kernel extends HttpKernel
         'permission' => PermissionMiddleware::class,
         'role' => RoleMiddleware::class,
         'role_or_permission' => RoleOrPermissionMiddleware::class,
-        'cors'          => \App\Http\Middleware\Cors::class, // added
+        'cors'          => \App\Http\Middleware\Cors::class,
     ];
 }
