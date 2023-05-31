@@ -37,22 +37,21 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('roles', RoleController::class);
     Route::apiResource('permissions', PermissionController::class);
-
     Route::apiResource('users', UserController::class);
     Route::apiResource('categories', CategoryController::class);
-    Route::get('/categoriesByName', [CategoryController::class, 'categoriesByName']);
     Route::apiResource('projects', ProjectController::class);
-    Route::get('prj-chart', [ProjectController::class, 'PrjChart'])->name('projects.PrjChart');
     Route::apiResource('quotations', QuotationController::class);
     Route::apiResource('contracts', ContractController::class);
     Route::apiResource('invoices', InvoiceController::class);
     Route::apiResource('receipts', ReceiptController::class);
-    Route::get('/userproject/{id}', [ProjectController::class, 'user_project']);
-    Route::get('/developerproject/{id}', [UserController::class, 'developer_project']);
     Route::get('/customers', [UserController::class, 'customers']);
+    Route::get('/developers', [UserController::class, 'developers']);
     Route::get('/customersWithName', [UserController::class, 'customersWithName']);
     Route::get('/userAdminWithName', [UserController::class, 'userAdminWithName']);
+    Route::get('/categoriesByName', [CategoryController::class, 'categoriesByName']);
+    Route::get('/userproject/{id}', [ProjectController::class, 'user_project']);
+    Route::get('/developerproject/{id}', [UserController::class, 'developer_project']);
     Route::get('/projectsActive', [ProjectController::class, 'projectsActive']);
-    Route::get('/developers', [UserController::class, 'developers']);
+    Route::get('prj-chart', [ProjectController::class, 'PrjChart'])->name('projects.PrjChart');
     Route::get('customer-chart', [UserController::class, 'customersByMonth'])->name('customers.CustomerChart');
 });

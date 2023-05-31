@@ -46,24 +46,6 @@ class ProjectController extends Controller
         }
     }
 
-    public function PrjChart(){
-        try{
-            $data=$this->prjRepo->prj_chart();
-            return response()->json([
-                'status'=> 'success',
-                'message'=> 'Project By Month Chart Data Successfully',
-                'data'=>$data
-            ],200);
-
-        }catch(Exception $e){
-            return response()->json([
-                'status' =>'error',
-                'message' => $e->getMessage(),
-            ],500);
-
-        }
-    }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -159,7 +141,6 @@ class ProjectController extends Controller
         }
     }
 
-
     // public function projectsActive(Request $request){
     //     try{
     //         $data = $this->prjService->projectsActive($request);
@@ -182,6 +163,24 @@ class ProjectController extends Controller
                 'status' => 'error',
                 'message' => $e->getMessage(),
             ], 500);
+        }
+    }
+
+    public function PrjChart(){
+        try{
+            $data=$this->prjRepo->prj_chart();
+            return response()->json([
+                'status'=> 'success',
+                'message'=> 'Project By Month Chart Data Successfully!',
+                'data'=>$data
+            ],200);
+
+        }catch(Exception $e){
+            return response()->json([
+                'status' =>'error',
+                'message' => $e->getMessage(),
+            ],500);
+
         }
     }
 }

@@ -33,21 +33,21 @@ class RoleController extends Controller
     public function index()
     {
         try {
-            $response = $this->roleRepo->get();
-        $data = $response['data'];
-        $rolePermissions = $response['rolePermissions'];
+            $data = $this->roleRepo->get();
+            //$response = $this->roleRepo->get();
+            // $data = $response['data'];
+            // $rolePermissions = $response['rolePermissions'];
 
         return response()->json([
             'status' => 'success',
             'message' => 'Role List!',
             'data' => $data,
-            'rolePermissions' => $rolePermissions
+            // 'rolePermissions' => $rolePermissions
         ], 200);
         } catch (Exception $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage(),
-                'data' => "hello error"
             ], 500);
         }
     }

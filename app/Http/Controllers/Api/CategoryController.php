@@ -17,8 +17,8 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     private $categoryRepo,$categoryService;
-    public function __construct(CategoryRepoInterface $cataegoryRepo,CategoryServiceInterface $categoryService){
-        $this->categoryRepo = $cataegoryRepo;
+    public function __construct(CategoryRepoInterface $categoryRepo,CategoryServiceInterface $categoryService){
+        $this->categoryRepo = $categoryRepo;
         $this->categoryService = $categoryService;
         // $this->middleware('permission:CategoryList', ['only' => 'index']);
         // $this->middleware('permission:CategoryCreate', ['only' => ['create', 'store']]);

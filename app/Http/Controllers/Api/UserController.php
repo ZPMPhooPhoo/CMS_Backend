@@ -70,40 +70,6 @@ class UserController extends Controller
         }
     }
 
-    public function customersWithName(Request $request)
-    {
-        try {
-            $data = $this->userService->customersWithName($request);
-            return response()->json([
-                'status' => 'success',
-                'message' => 'Search Customers By Name!',
-                'data' => $data
-            ], 200);
-        } catch (Exception $e) {
-            return response()->json([
-                'status' => 'error',
-                'message' => $e->getMessage(),
-            ], 500);
-        }
-    }
-
-    public function userAdminWithName(Request $request)
-    {
-        try {
-            $data = $this->userService->userAdminWithName($request);
-            return response()->json([
-                'status' => 'success',
-                'message' => 'your search name is already taken',
-                'data' => $data
-            ], 200);
-        } catch (Exception $e) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'yourn search name is not correct',
-            ], 500);
-        };
-    }
-
     /**
      * Display the specified resource.
      *
@@ -250,6 +216,38 @@ class UserController extends Controller
         }
     }
 
+    public function customersWithName(Request $request)
+    {
+        try {
+            $data = $this->userService->customersWithName($request);
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Search Customers By Name!',
+                'data' => $data
+            ], 200);
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage(),
+            ], 500);
+        }
+    }
 
+    public function userAdminWithName(Request $request)
+    {
+        try {
+            $data = $this->userService->userAdminWithName($request);
+            return response()->json([
+                'status' => 'success',
+                'message' => 'your search name is already taken',
+                'data' => $data
+            ], 200);
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'yourn search name is not correct',
+            ], 500);
+        };
+    }
 
 }

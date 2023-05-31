@@ -12,7 +12,6 @@ class RoleService implements RoleServiceInterface
 
     {   
         $data = Role::create($request);
-
         $data->givePermissionTo($request['permissions']);
         return $data;
     }

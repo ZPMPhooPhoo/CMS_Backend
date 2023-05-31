@@ -11,7 +11,6 @@ class QuotationService implements QuotationServiceInterface
 {
     public function store($request)
     {
-
         if (isset($request['quotation'])) {
             $extension = $request['quotation']->getClientOriginalExtension();
 

@@ -18,5 +18,3 @@ class Category extends Model
         return $this->belongsTo(Project::class);
     }
 }
-
-//testing poweranger
