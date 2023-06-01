@@ -141,4 +141,20 @@ class QuotationController extends Controller
             ], 500);
         }
     }
+    public function quotation_edit($id)
+    {
+        try {
+            $data = $this->quotationRepo->quotation_edit($id);
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Quotation Edit Data!',
+                'data' => $data
+            ], 200);
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage(),
+            ], 500);
+        }
+    }
 }

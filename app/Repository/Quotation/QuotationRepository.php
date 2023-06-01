@@ -41,4 +41,15 @@ class QuotationRepository implements QuotationRepoInterface
 
         return $result;
     }
+    public function quotation_edit($id)
+    {
+        $data = Quotation::where('id', $id)->first();
+        return [
+            'description' => $data->description,
+            'quotation' => $data->quotation,
+            'is_agree' => $data->is_agree,
+            'quotation_date' => $data->quotation_date,
+            'quotation_url' => $data->quotation ? url("storage/quotations/{$data->quotation}") : null,
+        ];
+    }
 }

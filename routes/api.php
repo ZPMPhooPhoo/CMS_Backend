@@ -34,7 +34,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::middleware('auth:sanctum')->group(function () {
+Route::middleware(['cors', 'auth:sanctum'])->group(function () {
     Route::apiResource('roles', RoleController::class);
     Route::apiResource('permissions', PermissionController::class);
 
@@ -55,4 +55,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/projectsActive', [ProjectController::class, 'projectsActive']);
     Route::get('/developers', [UserController::class, 'developers']);
     Route::get('customer-chart', [UserController::class, 'customersByMonth'])->name('customers.CustomerChart');
+    Route::get('/quotation-edit/{id}', [QuotationController::class, 'quotation_edit']);
 });
