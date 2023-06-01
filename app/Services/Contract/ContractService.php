@@ -70,36 +70,36 @@ class ContractService implements ContractServiceInterface
     //     return $contract;
     // }
     public function update($request, $contractId)
-{
-    $contract = Contract::find($contractId);
+    {
+        $contract = Contract::find($contractId);
 
-    if (!$contract) {
-        return false; // Contract not found
-    }
-
-    if (isset($request['contract'])) {
-        $extension = $request['contract']->getClientOriginalExtension();
-        $allowedExtensions = ['jpeg', 'jpg', 'png', 'pdf'];
-
-        if (!in_array($extension, $allowedExtensions)) {
-            return false; // Invalid file extension
+        if (!$contract) {
+            return false; // Contract not found
         }
 
-        $fileName = $request['contract']->getClientOriginalName();
-        $request['contract']->storeAs('public/contracts', $fileName);
+        if (isset($request['contract'])) {
+            $extension = $request['contract']->getClientOriginalExtension();
+            $allowedExtensions = ['jpeg', 'jpg', 'png', 'pdf'];
 
-        $request['contract'] = $fileName;
+            if (!in_array($extension, $allowedExtensions)) {
+                return false; // Invalid file extension
+            }
+
+            $fileName = $request['contract']->getClientOriginalName();
+            $request['contract']->storeAs('public/contracts', $fileName);
+
+            $request['contract'] = $fileName;
+        }
+
+        $contract->update([
+            'contract' => $request['contract'],
+            'description' => $request['description'],
+            'contract_date' => $request['contract_date'],
+            'quotation_id' => $request['quotation_id'],
+        ]);
+
+        return $contract;
     }
-
-    $contract->update([
-        'contract' => $request['contract'],
-        'description' => $request['description'],
-        'contract_date' => $request['contract_date'],
-        'quotation_id' => $request['quotation_id'],
-    ]);
-
-    return $contract;
-}
 
 
     public function delete($id)

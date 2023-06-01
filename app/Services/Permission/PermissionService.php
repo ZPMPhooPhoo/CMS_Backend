@@ -8,13 +8,15 @@ class PermissionService implements PermissionServiceInterface
 {
     public function store($request)
     {
-        return  Permission::create($request);
+        $data = Permission::create($request);
+        return $data;
     }
 
     public function update($request,$id)
     {
         $permission = Permission::where('id', $id)->first();
-        return $permission->update($request);
+        $data = $permission->update($request);
+        return $data;
     }
 
     public function delete($id)

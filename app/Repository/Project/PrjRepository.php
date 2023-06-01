@@ -15,16 +15,6 @@ class PrjRepository implements PrjRepoInterface
         return $data;
     }
 
-    public function prj_chart()
-    {
-        $projects = Project::selectRaw('DATE_FORMAT(created_at, "%Y-%m") as month, COUNT(*) as count')
-        ->groupBy('month')
-        ->orderBy('month')
-        ->get();
-
-        return $projects;
-    }
-
     public function show($id)
     {
         $data = Project::with('category')->where('id', $id)->first();
@@ -33,23 +23,21 @@ class PrjRepository implements PrjRepoInterface
 
     public function user_project($id)
     {
-        // $userIds = DB::table('user_projects')
-        //     ->where('user_id', $id)
-        //     ->pluck('project_id')
-        //     ->toArray();
-        // return $userIds;
-
-        $userID = $id; // ID of the user
+        $userID = $id;
 
         $data = Project::with("category")->whereHas('user', function ($query) use ($userID) {
             $query->where('user_id', $userID);
         })->get();
-
-        // foreach ($projects as $project) {
-        //     echo "Project ID: " . $project->id . "\n";
-        //     echo "Project Name: " . $project->name . "\n";
-
-        // }
         return $data;
+    }
+
+    public function prj_chart()
+    {
+        $projects = Project::selectRaw('DATE_FORMAT(created_at, "%Y-%m") as month, COUNT(*) as count')
+        ->groupBy('month')
+        ->orderBy('month')
+        ->get();
+
+        return $projects;
     }
 }

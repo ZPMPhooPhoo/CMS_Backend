@@ -12,24 +12,7 @@ class RoleRepository implements RoleRepoInterface
     public function get()
     {
         $data = Role::all() ;
-        $per =Permission::all();
-        // $rolePermission=[];
-        foreach($data as $da){
-                $permissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id",$da->id)
-                // ->pluck('role_has_permissions.permission_id')
-                ->get();
-                foreach($permissions as $pers){
-                        $permissionName =DB::table("permissions")->where("permissions.id" ,$pers->permission_id)->pluck('permissions.name')->all();
-                        $rolePermission =$permissionName;
-                }
-                // $rolePermission []=$permissions;
-                    
-        }
-         
-        return [
-            'data' => $data,
-            'rolePermissions' => $rolePermission
-        ];
+        return $data;
     }
 
     public function show($id)
