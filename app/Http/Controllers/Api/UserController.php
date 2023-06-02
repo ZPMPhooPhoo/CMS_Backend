@@ -16,12 +16,22 @@ class UserController extends Controller
     {
         $this->userRepo = $userRepo;
         $this->userService = $userService;
-        // $this->middleware('permission:users', ['only' => 'index']);
-        // $this->middleware('permission:UserCreate', ['only' => ['create', 'store']]);
-        // $this->middleware('permission:userEdit', ['only' => ['edit', 'update']]);
-        // $this->middleware('permission:UserShow', ['only' => 'show']);
-        // $this->middleware('permission:UserDelete', ['only' => 'destroy']);
-        // $this->middleware('auth');
+        
+        $this->middleware('permission:client-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:client-edit', ['only' => ['show']]);
+        $this->middleware('permission:user-edit', ['only' => ['show','edit', 'update']]);
+        $this->middleware('permission:client-delete', ['only' => 'destroy']);
+        $this->middleware('permission:user-delete', ['only' => 'destroy']);
+        $this->middleware('permission:dashboard', ['only' => 'customersByMonth']);
+        $this->middleware('permission:users', ['only' => 'index']);
+        $this->middleware('permission:users', ['only' => 'userAdminWithName']);
+        $this->middleware('permission:project-detail', ['only' => 'developer_project']);
+        $this->middleware('permission:project-edit', ['only' => 'developer_project']);
+        $this->middleware('permission:add-client-project', ['only' => 'developers']);
+        $this->middleware('permission:project-edit', ['only' => 'developers']);
+        $this->middleware('permission:client-lists', ['only' => ['customersWithName', 'customers']]);
+
+        $this->middleware('auth');
     }
     /**
      * Display a listing of the resource.

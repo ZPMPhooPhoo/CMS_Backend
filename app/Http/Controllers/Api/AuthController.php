@@ -11,6 +11,13 @@ use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
+    public function __construct(){
+        
+        $this->middleware('permission:user-create', ['only' => 'signup']);
+        $this->middleware('permission:user-edit', ['only' => 'userUpdate']);
+        $this->middleware('auth');
+    }
+
     public function signup(Request $request)
     {
         try {

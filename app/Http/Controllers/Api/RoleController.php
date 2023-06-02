@@ -22,12 +22,11 @@ class RoleController extends Controller
     public function __construct(RoleRepoInterface $roleRepo,RoleServiceInterface $roleService){
         $this->roleRepo = $roleRepo;
         $this->roleService = $roleService;
-        // $this->middleware('permission:RoleList', ['only' => 'index']);
-        // $this->middleware('permission:RoleCreate', ['only' => ['create', 'store']]);
-        // $this->middleware('permission:RoleEdit', ['only' => ['edit', 'update']]);
-        // $this->middleware('permission:RoleShow', ['only' => 'show']);
-        // $this->middleware('permission:RoleDelete', ['only' => 'destroy']);
-        // $this->middleware('auth');
+        $this->middleware('permission:dashboard', ['only' => 'index']);
+        $this->middleware('permission:users', ['only' => 'index']);
+        $this->middleware('permission:user-create', ['only' => 'index']);
+        $this->middleware('permission:user-edit', ['only' => 'index']);
+        $this->middleware('auth');
     }
 
     public function index()

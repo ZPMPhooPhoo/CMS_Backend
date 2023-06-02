@@ -21,12 +21,14 @@ class ProjectController extends Controller
     public function __construct(PrjRepoInterface $prjRepo,PrjServiceInterface $prjService){
         $this->prjRepo = $prjRepo;
         $this->prjService = $prjService;
-        // $this->middleware('permission:ProjectList', ['only' => 'index']);
-        // $this->middleware('permission:ProjectCreate', ['only' => ['create', 'store']]);
-        // $this->middleware('permission:ProjectEdit', ['only' => ['edit', 'update']]);
-        // $this->middleware('permission:ProjectShow', ['only' => 'show']);
-        // $this->middleware('permission:ProjectDelete', ['only' => 'destroy']);
-        // $this->middleware('auth');
+        
+        $this->middleware('permission:dashboard', ['only' => 'PrjChart']);
+        $this->middleware('permission:project-edit', ['only' => ['show', 'update']]);
+        $this->middleware('permission:projects', ['only' => 'index']);
+        $this->middleware('permission:client-project-lists', ['only' => ['user_project', 'show']]);
+        $this->middleware('permission:project-detail', ['only' => 'show']);
+        $this->middleware('permission:add-client-project', ['only' => ['create', 'store']]);
+        $this->middleware('auth');
     }
 
     public function index()

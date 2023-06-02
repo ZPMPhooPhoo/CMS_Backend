@@ -20,12 +20,15 @@ class CategoryController extends Controller
     public function __construct(CategoryRepoInterface $categoryRepo,CategoryServiceInterface $categoryService){
         $this->categoryRepo = $categoryRepo;
         $this->categoryService = $categoryService;
-        // $this->middleware('permission:CategoryList', ['only' => 'index']);
-        // $this->middleware('permission:CategoryCreate', ['only' => ['create', 'store']]);
-        // $this->middleware('permission:CategoryEdit', ['only' => ['edit', 'update']]);
-        // $this->middleware('permission:CategoryShow', ['only' => 'show']);
-        // $this->middleware('permission:CategoryDelete', ['only' => 'destroy']);
-        // $this->middleware('auth');
+
+        $this->middleware('permission:services', ['only' => 'categoriesByName']);
+        $this->middleware('permission:category-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:category-edit', ['only' => ['show','edit', 'update']]);
+        $this->middleware('permission:category-delete', ['only' => 'destroy']);
+        $this->middleware('permission:add-client-project', ['only' => 'index']);
+        $this->middleware('permission:project-edit', ['only' => 'index']);
+        $this->middleware('permission:services', ['only' => ['index', 'categoriesByName']]);
+        $this->middleware('auth');
     }
 
     public function index()

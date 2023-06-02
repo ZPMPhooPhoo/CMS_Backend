@@ -23,12 +23,10 @@ class ContractController extends Controller
     {
         $this->contractRepo = $contractRepo;
         $this->contractService = $contractService;
-        // $this->middleware('permission:ContractList', ['only' => 'index']);
-        // $this->middleware('permission:ContractCreate', ['only' => ['create', 'store']]);
-        // $this->middleware('permission:ContractEdit', ['only' => ['edit', 'update']]);
-        // $this->middleware('permission:ContractShow', ['only' => 'show']);
-        // $this->middleware('permission:ContractDelete', ['only' => 'destroy']);
-        // $this->middleware('auth');
+        
+        $this->middleware('permission:contract-create', ['only' => ['create', 'store']]);
+        
+        $this->middleware('auth');
     }
 
     public function index()
