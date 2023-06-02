@@ -28,6 +28,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/auth/signup', [AuthController::class, 'signup']);
 Route::post('/auth/signin', [AuthController::class, 'signin']);
+Route::post('/auth/logout', [AuthController::class, 'Logout']);
 Route::post('/auth/userUpdate/{id}', [AuthController::class, 'userUpdate']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -44,7 +45,10 @@ Route::middleware(['cors', 'auth:sanctum'])->group(function () {
     Route::apiResource('projects', ProjectController::class);
     Route::get('prj-chart', [ProjectController::class, 'PrjChart'])->name('projects.PrjChart');
     Route::apiResource('quotations', QuotationController::class);
+    Route::get('/storage/quotations/{filename}', [QuotationController::class, 'download']);
+    Route::get('contract-quotations/{id}', [QuotationController::class, 'contract_quotation']);
     Route::apiResource('contracts', ContractController::class);
+    Route::get('/storage/contracts/{filename}', [ContractController::class, 'download']);
     Route::apiResource('invoices', InvoiceController::class);
     Route::apiResource('receipts', ReceiptController::class);
     Route::get('/userproject/{id}', [ProjectController::class, 'user_project']);

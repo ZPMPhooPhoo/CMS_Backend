@@ -9,6 +9,7 @@ use App\Repository\Contract\ContractRepoInterface;
 use App\Services\Contract\ContractServiceInterface;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ContractController extends Controller
 {
@@ -17,8 +18,9 @@ class ContractController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    private $contractRepo,$contractService;
-    public function __construct(ContractRepoInterface $contractRepo,ContractServiceInterface $contractService){
+    private $contractRepo, $contractService;
+    public function __construct(ContractRepoInterface $contractRepo, ContractServiceInterface $contractService)
+    {
         $this->contractRepo = $contractRepo;
         $this->contractService = $contractService;
         // $this->middleware('permission:ContractList', ['only' => 'index']);
@@ -45,6 +47,17 @@ class ContractController extends Controller
                 'data' => $data
             ], 500);
         }
+    }
+
+    public function download($contract)
+    {
+        $filePath = 'public/contracts/' . $contract;
+
+        if (Storage::exists($filePath)) {
+            return Storage::download($filePath);
+        }
+
+        abort(404, 'File not found.');
     }
 
 
@@ -107,7 +120,7 @@ class ContractController extends Controller
     public function update(ContractRequest $request, $id)
     {
         try {
-            $data = $this->contractService->update($request->validated(),$id);
+            $data = $this->contractService->update($request->validated(), $id);
             return response()->json([
                 'status' => 'success',
                 'message' => 'Contract Updated Successfully!',
