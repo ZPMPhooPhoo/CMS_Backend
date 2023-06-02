@@ -26,7 +26,12 @@ class PrjService implements PrjServiceInterface
     public function update($request, $id){
         $project = Project::where('id', $id)->first();
         $data = $project->update($request);
-        $project->user()->sync($request['users']);
+        $userIds = $request['users'];
+        $excludedUserId = $request['num_id'];
+
+        $project->user()->sync($userIds, function ($query) use ($excludedUserId) {
+            $query->whereNotIn('user_id', $excludedUserId);
+        });
         return $data;
     }
 

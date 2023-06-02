@@ -41,6 +41,13 @@ class UserRepository implements UserRepoInterface
     }
     public function developer_project($project_id)
     {
+        // $userIds = $request['users'];
+        // $excludedUserId = 5;
+
+        // $project->user()->sync($userIds, function ($query) use ($excludedUserId) {
+        //     $query->where('user_id', '!=', $excludedUserId);
+        // });
+        
         $data = User::whereHas('project', function ($query) use ($project_id) {
             $query->where('project_id', $project_id);
         })->get();
