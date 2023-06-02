@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Repository\Contract;
+
 use App\Models\Contract;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,9 +19,8 @@ class ContractRepository implements ContractRepoInterface
                 'description' => $contract->description,
                 'contract_date' => $contract->contract_date,
                 'quotation_id' => $contract->quotation_id,
-                'contract_url' => $contract->contract ? url("storage/contracts/{$contract->contract}") : null,
+                'contract_url' => $contract->contract ? url("api/storage/contracts/{$contract->contract}") : null,
             ];
-
         });
 
         return $contracts;
@@ -35,10 +35,8 @@ class ContractRepository implements ContractRepoInterface
             'description' => $data->description,
             'contract_date' => $data->contract_date,
             'quotation_id' => $data->quotation_id,
-            'contract_url' => $data->contract ? url("storage/contracts/{$data->contract}") : null
+            'contract_url' => $data->contract ? url("api/storage/contracts/{$data->contract}") : null
         ];
-
         return $contractData;
     }
-
 }

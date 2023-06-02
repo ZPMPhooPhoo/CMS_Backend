@@ -199,23 +199,20 @@ class UserController extends Controller
 
     public function customersByMonth()
     {
-        try{
-            $data=$this->userRepo->customersByMonth();
+        try {
+            $data = $this->userRepo->customersByMonth();
             return response()->json([
                 'status' => 'Success',
                 'message' => 'Customer By Month Successfully!',
                 'data' => $data
-            ],200);
-
-        }catch(Exception $e)
-        {
+            ], 200);
+        } catch (Exception $e) {
             return response()->json([
-                'status'=>'error',
-                'message'=>$e->getMessage(),
-            ],500);
+                'status' => 'error',
+                'message' => $e->getMessage(),
+            ], 500);
         }
     }
-
     public function customersWithName(Request $request)
     {
         try {
@@ -245,9 +242,8 @@ class UserController extends Controller
         } catch (Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'yourn search name is not correct',
+                'message' => 'Your search name is not correct!',
             ], 500);
         };
     }
-
 }

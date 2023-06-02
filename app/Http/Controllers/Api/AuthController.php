@@ -134,6 +134,8 @@ class AuthController extends Controller
                 'status' => true,
                 'message' => 'User Logged In Successfully!',
                 'role_id' => $user->role_id,
+                'name' => $user->name,
+                'id' => $user->id,
                 'token' => $user->createToken("API TOKEN")->plainTextToken
             ], 200);
         } catch (\Throwable $th) {
@@ -142,5 +144,13 @@ class AuthController extends Controller
                 'message' => $th->getMessage()
             ], 500);
         }
+    }
+
+
+    public function Logout(Request $request)
+    {
+
+        Auth::logout();
+        return response()->json(['message' => 'logout successfully'], 200);
     }
 }

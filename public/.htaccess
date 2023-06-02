@@ -18,4 +18,12 @@
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
+
+    <IfModule mod_headers.c>
+        SetEnvIf Origin "^http(s)?://(.+)$" CORS_ALLOW_ORIGIN=$0$1
+        Header add Access-Control-Allow-Origin %{CORS_ALLOW_ORIGIN}e env=CORS_ALLOW_ORIGIN
+        Header add Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
+        Header add Access-Control-Allow-Headers "Content-Type, Authorization"
+        Header merge Vary "Origin"
+    </IfModule>
 </IfModule>

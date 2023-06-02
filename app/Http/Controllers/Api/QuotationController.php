@@ -9,6 +9,7 @@ use App\Repository\Quotation\QuotationRepoInterface;
 use App\Services\Quotation\QuotationServiceInterface;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class QuotationController extends Controller
 {
@@ -46,6 +47,17 @@ class QuotationController extends Controller
                 'data' => $data
             ], 500);
         }
+    }
+
+    public function download($quotation)
+    {
+        $filePath = 'public/quotations/' . $quotation;
+
+        if (Storage::exists($filePath)) {
+            return Storage::download($filePath);
+        }
+
+        abort(404, 'File not found.');
     }
 
     /**
@@ -132,6 +144,39 @@ class QuotationController extends Controller
             return response()->json([
                 'status' => 'success',
                 'message' => 'Quotation Deleted Successfully!',
+                'data' => $data
+            ], 200);
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage(),
+            ], 500);
+        }
+    }
+    public function quotation_edit($id)
+    {
+        try {
+            $data = $this->quotationRepo->quotation_edit($id);
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Quotation Edit Data!',
+                'data' => $data
+            ], 200);
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function contract_quotation($id)
+    {
+        try {
+            $data = $this->quotationRepo->contract_quotation($id);
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Quotation Contract Data!',
                 'data' => $data
             ], 200);
         } catch (Exception $e) {

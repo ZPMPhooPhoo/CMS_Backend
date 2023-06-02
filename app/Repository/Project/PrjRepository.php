@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Repository\Project;
+
 use App\Models\Project;
 // use Carbon\Carbon;
 use App\Models\User;
@@ -11,7 +12,7 @@ class PrjRepository implements PrjRepoInterface
 {
     public function get()
     {
-        $data = Project::all();
+        $data = Project::with('category')->get();
         return $data;
     }
 
@@ -34,9 +35,9 @@ class PrjRepository implements PrjRepoInterface
     public function prj_chart()
     {
         $projects = Project::selectRaw('DATE_FORMAT(created_at, "%Y-%m") as month, COUNT(*) as count')
-        ->groupBy('month')
-        ->orderBy('month')
-        ->get();
+            ->groupBy('month')
+            ->orderBy('month')
+            ->get();
 
         return $projects;
     }

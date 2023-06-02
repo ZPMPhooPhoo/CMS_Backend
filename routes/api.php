@@ -28,20 +28,24 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/auth/signup', [AuthController::class, 'signup']);
 Route::post('/auth/signin', [AuthController::class, 'signin']);
+Route::post('/auth/logout', [AuthController::class, 'Logout']);
 Route::post('/auth/userUpdate/{id}', [AuthController::class, 'userUpdate']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::middleware('auth:sanctum')->group(function () {
+Route::middleware(['cors', 'auth:sanctum'])->group(function () {
     Route::apiResource('roles', RoleController::class);
     Route::apiResource('permissions', PermissionController::class);
     Route::apiResource('users', UserController::class);
     Route::apiResource('categories', CategoryController::class);
     Route::apiResource('projects', ProjectController::class);
     Route::apiResource('quotations', QuotationController::class);
+    Route::get('/storage/quotations/{filename}', [QuotationController::class, 'download']);
+    Route::get('contract-quotations/{id}', [QuotationController::class, 'contract_quotation']);
     Route::apiResource('contracts', ContractController::class);
+    Route::get('/storage/contracts/{filename}', [ContractController::class, 'download']);
     Route::apiResource('invoices', InvoiceController::class);
     Route::apiResource('receipts', ReceiptController::class);
     Route::get('/customers', [UserController::class, 'customers']);
@@ -54,4 +58,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/projectsActive', [ProjectController::class, 'projectsActive']);
     Route::get('prj-chart', [ProjectController::class, 'PrjChart'])->name('projects.PrjChart');
     Route::get('customer-chart', [UserController::class, 'customersByMonth'])->name('customers.CustomerChart');
+    Route::get('/quotation-edit/{id}', [QuotationController::class, 'quotation_edit']);
 });
