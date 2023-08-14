@@ -1,64 +1,46 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Customer Support Ticketing System
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Introduction
+**Customer Support Ticket Management System** is to be able to track the issues related to the projects. In this system, we will have admin users who can manage customers and members. Customers can create issues and manage them. They can also set the status. Depending on issues, sub-tasks can be created and can assign a respective member by customers or members. As members, they can manage sub-tasks and status. Issues and sub-tasks can only be deleted admin users.
 
-## About Laravel
+## Features
+- Efficiently processes and catalogs customer service requests.
+- Stores tickets alongside relevant user information for easy reference.
+- User-friendly interface for customer service representatives, managers, and administrators.
+- Provides easy access to the ticketing system for all designated users.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## How to Use
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Installation
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+1. Clone the repository with `git clone`
+2. Run `npm install`
+3. Run `npm run dev`
 
-## Learning Laravel
+## Dependencies
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+The Ticket Management System relies on the following dependencies:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- **@tabler/icons-react**: Icon set for easy integration of icons into your components.
+- **@tailwindcss/aspect-ratio**: A Tailwind CSS plugin for responsive aspect ratio containers.
+- **@types/react-modal**: TypeScript typings for the `react-modal` library.
+- **axios**: A promise-based HTTP client for making API requests.
+- **dropzone**: A library for creating drag-and-drop file upload areas.
+- **framer-motion**: A library for creating animations and transitions in React applications.
+- **js-cookie**: A library for handling cookies in JavaScript.
+- **moment**: A library for parsing, manipulating, and formatting dates and times.
+- **react**: The core library for building UI components.
+- **react-avatar**: A library for rendering avatars or profile images.
+- **react-data-table-component**: A feature-rich data table library for React.
+- **react-datepicker**: A datepicker component for selecting dates.
+- **react-dom**: The entry point for working with the DOM in React applications.
+- **react-dropzone**: A simple React component for handling file drops.
+- **react-icons**: A collection of icon sets for React applications.
+- **react-loader-spinner**: A component for displaying loading spinners.
+- **react-modal**: A flexible and accessible modal dialog component for React.
+- **react-paginate**: A pagination component for displaying paginated data.
+- **react-query**: A library for managing and caching asynchronous data.
+- **react-redux**: Official React bindings for Redux state management.
+- **react-router-dom**: A library for routing and navigation in React applications.
+- **react-toastify**: A library for displaying toast notifications.
+- **zustand**: A small, fast state management library.
