@@ -1,7 +1,9 @@
 # Customer Support Ticketing System
 
 ## Introduction
-**Customer Support Ticket Management System** is to be able to track the issues related to the projects. In this system, we will have admin users who can manage customers and members. Customers can create issues and manage them. They can also set the status. Depending on issues, sub-tasks can be created and can assign a respective member by customers or members. As members, they can manage sub-tasks and status. Issues and sub-tasks can only be deleted admin users.
+Experience a new level of efficiency in managing your project's issues with our cutting-edge Customer Support Ticket Management System. Designed to optimize issue tracking and resolution, this system offers a seamless collaboration platform for customers, developers, and administrators alike. Whether you're a customer reporting an issue, a developer working on a solution, or an administrator overseeing the process, our system empowers you to achieve swift and effective issue management and resolution.
+
+
 
 ## Features
 
@@ -57,4 +59,13 @@ npm run dev
 8. **Managing Subtasks:** Similar to tickets, you can create subtasks for more detailed tracking. Subtasks can be edited, assigned, and managed like regular tickets.
 9. **Logout:** Remember to log out when you're finished using the system to ensure security.
 
+## Setting Up the Backend
 
+To utilize the full capabilities of this Ticket Management System, it's essential to set up and run the corresponding backend services that provide the required APIs. For detailed instructions and further information, please refer to their respective branches. This integration ensures a comprehensive and functional environment for seamless utilization of the system's features.
+
+1. Clone the **Ticket Management System Backend** repository to your local machine:
+   ```bash
+   git clone https://repos.aceplusbeta.com/b2b/talent-pool/cs-ticket-management-system-backend.git
+2. Clone the ** User Api** repository to your local machine:
+    ```bash 
+    git clone https://repos.aceplusbeta.com/b2b/talent-pool/user-api.git
